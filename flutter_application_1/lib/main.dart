@@ -5,10 +5,6 @@ import 'house.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// TODO: Nicer header
-// TODO: List
-// TODO: Nicer font
-
 void main() {
   runApp(GOTApp());
 }
@@ -72,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: Extract app bar
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
@@ -93,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ),
-      // TODO: Extract button to variable, function
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Refresh',
