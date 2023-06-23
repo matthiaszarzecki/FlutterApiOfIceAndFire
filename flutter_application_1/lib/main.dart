@@ -22,21 +22,21 @@ class GOTApp extends StatelessWidget {
     return MaterialApp(
       title: 'Houses of Westeros',
       theme: themeData,
-      home: const MyHomePage(title: 'Houses of Westeros'),
+      home: const SingleHouseView(title: 'Houses of Westeros'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class SingleHouseView extends StatefulWidget {
+  const SingleHouseView({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SingleHouseView> createState() => _SingleHouseViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SingleHouseViewState extends State<SingleHouseView> {
   late Future<House> futureAlbum;
 
   @override
