@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'house_view.dart';
 import 'house.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -82,18 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final house = snapshot.data!;
-              // TODO: Extract elements into function, only return elements when string exists.
-              return Column(
-                children: [
-                  Text(
-                    house.name,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  Text(house.region),
-                  Text("🛡️ ${house.coatOfArms.toString()}"),
-                  Text("🪶 ${house.words.toString()}"),
-                ],
-              );
+              return HouseView(house: house);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
