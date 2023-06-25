@@ -37,17 +37,17 @@ class SingleHouseView extends StatefulWidget {
 }
 
 class _SingleHouseViewState extends State<SingleHouseView> {
-  late Future<House> futureAlbum;
+  late Future<House> futureHouse;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    futureHouse = fetchAlbum();
   }
 
-  void _incrementCounter() {
+  void _loadNewHouse() {
     setState(() {
-      futureAlbum = fetchAlbum();
+      futureHouse = fetchAlbum();
     });
   }
 
@@ -74,22 +74,21 @@ class _SingleHouseViewState extends State<SingleHouseView> {
       ),
       body: Center(
         child: FutureBuilder<House>(
-          future: futureAlbum,
+          future: futureHouse,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final house = snapshot.data!;
-              return HouseView(house: house);
+              return SingleHouseDisplay(house: house);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
 
-            // By default, show a loading spinner.
             return const CircularProgressIndicator();
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _loadNewHouse,
         tooltip: 'Refresh',
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,

@@ -1,8 +1,8 @@
 import 'house.dart';
 import 'package:flutter/material.dart';
 
-class HouseView extends StatelessWidget {
-  const HouseView({super.key, required this.house});
+class SingleHouseDisplay extends StatelessWidget {
+  const SingleHouseDisplay({super.key, required this.house});
 
   final House house;
 
