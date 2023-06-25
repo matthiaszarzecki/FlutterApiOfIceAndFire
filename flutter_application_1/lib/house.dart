@@ -3,6 +3,7 @@ class House {
   final String region;
   final String coatOfArms;
   final String words;
+  
   final List<dynamic> titles; // TODO: Figure out how to do string arrays
   final List<dynamic> seats;
 
