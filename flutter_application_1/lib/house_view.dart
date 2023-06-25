@@ -61,6 +61,41 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
+    if (house.titles.isNotEmpty) {
+      elements.add(const Text("Titles:"));
+      for(var title in house.titles) {
+        elements.add(Text(title));
+      }
+    }
+
+    if (house.seats.isNotEmpty) {
+      elements.add(const Text("Seats:"));
+      for(var seat in house.seats) {
+        elements.add(Text(seat));
+      }
+    }
+
+    if (house.ancestralWeapons.isNotEmpty) {
+      elements.add(const Text("Ancestral Weapons:"));
+      for(var weapon in house.ancestralWeapons) {
+        elements.add(Text("🗡️ ${weapon.toString()}"));
+      }
+    }
+
+    if (house.cadetBranches.isNotEmpty) {
+      elements.add(const Text("Cadet Branches:"));
+      for(var cadetBranch in house.cadetBranches) {
+        elements.add(Text(cadetBranch));
+      }
+    }
+
+    if (house.swornMembers.isNotEmpty) {
+      elements.add(const Text("Members:"));
+      for(var member in house.swornMembers) {
+        elements.add(Text(member));
+      }
+    }
+
     return Column(children: elements);
   }
 }
