@@ -6,9 +6,9 @@ import 'package:http/http.dart' as http;
 import 'single_house_display.dart';
 
 class SingleHouseLoader extends StatefulWidget {
-  const SingleHouseLoader({super.key, required this.title});
+  const SingleHouseLoader({super.key, required this.house});
 
-  final String title;
+  final House house;
 
   @override
   State<SingleHouseLoader> createState() => _SingleHouseLoaderState();
@@ -20,7 +20,7 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
   @override
   void initState() {
     super.initState();
-    futureHouse = loadNewRandomHouse();
+    //futureHouse = loadNewRandomHouse();
   }
 
   void _loadNewHouse() {
@@ -45,33 +45,21 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: FutureBuilder<House>(
-          future: futureHouse,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final house = snapshot.data!;
-              return SingleHouseDisplay(house: house);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
+    return Center(
+      child: SingleHouseDisplay(house: widget.house),
+      /*child: FutureBuilder<House>(
+        future: futureHouse,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final house = snapshot.data!;
+            return SingleHouseDisplay(house: house);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
 
-            return const CircularProgressIndicator();
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loadNewHouse,
-        tooltip: 'Refresh',
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        child: const Icon(Icons.refresh),
-      ),
+          return const CircularProgressIndicator();
+        },
+      ),*/
     );
   }
 }

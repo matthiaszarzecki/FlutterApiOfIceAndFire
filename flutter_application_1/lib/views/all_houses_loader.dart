@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/views/single_house_loader.dart';
 import '../models/house.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   Future<AllHousesResponse> loadAllHouses() async {
-    final response = await http.get(
-        Uri.parse('https://anapioficeandfire.com/api/houses'));
+    final response = await http.get(Uri.parse(
+        'https://anapioficeandfire.com/api/houses?page=1&pageSize=50'));
 
     if (response.statusCode == 200) {
       return AllHousesResponse.fromJson(jsonDecode(response.body));
@@ -65,8 +66,30 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final allHouses = snapshot.data!.houses;
+              List<Widget> elements = [];
 
-              return Text(allHouses.length.toString());
+              for (var house in allHouses) {
+                elements.add(
+                  ElevatedButton(
+                    child: Text(house.name),
+                    onPressed: () {
+                      // Navigate to route
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                                  appBar: AppBar(
+                                    title: Text(house.name),
+                                  ),
+                                  body: SingleHouseLoader(house: house)
+                                )),
+                      );
+                    },
+                  ),
+                );
+              }
+
+              return ListView(children: elements);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }

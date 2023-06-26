@@ -10,12 +10,6 @@ class SingleHouseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
-    elements.add(Text(
-      house.name,
-      style: Theme.of(context).textTheme.headlineSmall,
-    ));
-    elements.add(const SizedBox(height: 10));
-
     if (house.region.isNotEmpty) {
       elements.add(Text("of ${house.region.toString()}"));
       elements.add(const SizedBox(height: 10));
