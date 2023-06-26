@@ -1,4 +1,4 @@
-import '../views/single_house_loader.dart';
+import '../views/all_houses_loader.dart';
 import 'package:flutter/material.dart';
 
 class GOTApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class GOTApp extends StatelessWidget {
     return MaterialApp(
       title: 'Houses of Westeros',
       theme: themeData,
-      home: const SingleHouseLoader(title: 'Houses of Westeros'),
+      home: const AllHousesLoader(title: 'Houses of Westeros'),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'house.dart';
+import '../models/house.dart';
 import 'package:flutter/material.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
