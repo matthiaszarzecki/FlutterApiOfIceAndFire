@@ -1,43 +1,52 @@
 import '../models/house.dart';
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'single_house_display.dart';
 
-class SingleHouseLoader extends StatefulWidget {
-  const SingleHouseLoader({super.key, required this.title});
+class AllHousesLoader extends StatefulWidget {
+  const AllHousesLoader({super.key, required this.title});
 
   final String title;
 
   @override
-  State<SingleHouseLoader> createState() => _SingleHouseLoaderState();
+  State<AllHousesLoader> createState() => _AllHousesLoaderState();
 }
 
-class _SingleHouseLoaderState extends State<SingleHouseLoader> {
-  late Future<House> futureHouse;
+class AllHousesResponse {
+  final List<House> houses;
+
+  AllHousesResponse({required this.houses});
+
+  factory AllHousesResponse.fromJson(List<dynamic> json) {
+    List<House> houses = [];
+    for (var house in json) {
+      houses.add(House.fromJson(house));
+    }
+    return AllHousesResponse(houses: houses);
+  }
+}
+
+class _AllHousesLoaderState extends State<AllHousesLoader> {
+  late Future<AllHousesResponse> futureAllHouses;
 
   @override
   void initState() {
     super.initState();
-    futureHouse = loadNewRandomHouse();
+    futureAllHouses = loadAllHouses();
   }
 
-  void _loadNewHouse() {
+  void _loadAllHouses() {
     setState(() {
-      futureHouse = loadNewRandomHouse();
+      futureAllHouses = loadAllHouses();
     });
   }
 
-  Future<House> loadNewRandomHouse() async {
-    const numberOfHouses = 444;
-    final randomNumber = Random().nextInt(numberOfHouses);
-
+  Future<AllHousesResponse> loadAllHouses() async {
     final response = await http.get(
-        Uri.parse('https://anapioficeandfire.com/api/houses/$randomNumber'));
+        Uri.parse('https://anapioficeandfire.com/api/houses'));
 
     if (response.statusCode == 200) {
-      return House.fromJson(jsonDecode(response.body));
+      return AllHousesResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load data');
     }
@@ -51,12 +60,13 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: FutureBuilder<House>(
-          future: futureHouse,
+        child: FutureBuilder<AllHousesResponse>(
+          future: futureAllHouses,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final house = snapshot.data!;
-              return SingleHouseDisplay(house: house);
+              final allHouses = snapshot.data!.houses;
+
+              return Text(allHouses.length.toString());
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -66,7 +76,7 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _loadNewHouse,
+        onPressed: _loadAllHouses,
         tooltip: 'Refresh',
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
