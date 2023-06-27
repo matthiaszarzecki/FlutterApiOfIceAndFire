@@ -103,7 +103,9 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleHouseDisplay(
-          houseBasic: widget.houseBasic, houseUpdated: houseUpdated),
+        houseBasic: widget.houseBasic,
+        houseUpdated: houseUpdated,
+      ),
     );
   }
 }
