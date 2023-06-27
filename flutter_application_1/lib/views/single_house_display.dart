@@ -35,7 +35,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("Current Lord: ${character.name}");
+              return Text("👑 Current Lord: ${character.name}");
             }
             return const SizedBox(height: 0);
           },
@@ -51,7 +51,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("Heir: ${character.name}");
+              return Text("👱 Heir: ${character.name}");
             }
             return const SizedBox(height: 0);
           },
@@ -67,7 +67,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("Founder: ${character.name}");
+              return Text("👱 Founder: ${character.name}");
             }
             return const SizedBox(height: 0);
           },
@@ -83,7 +83,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               HouseBasic houseBasic = snapshot.data as HouseBasic;
-              return Text("Overlord: ${houseBasic.name}");
+              return Text("🏰 Overlord: ${houseBasic.name}");
             }
             return const SizedBox(height: 0);
           },
@@ -94,7 +94,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.founded.isNotEmpty) {
-      elements.add(Text("Founded: ${house.founded.toString()}"));
+      elements.add(Text("📜 Founded: ${house.founded.toString()}"));
       elements.add(const SizedBox(height: 10));
     }
 
@@ -104,7 +104,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.titles.length > 1) {
-      elements.add(const Text("Titles:"));
+      elements.add(const Text("🎖️ Titles:"));
       for (var title in house.titles) {
         elements.add(Text(title));
       }
@@ -112,7 +112,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.seats.length > 1) {
-      elements.add(const Text("Seats:"));
+      elements.add(const Text("🏰 Seats:"));
       for (var seat in house.seats) {
         elements.add(Text(seat));
       }
@@ -128,7 +128,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.cadetBranches.isNotEmpty) {
-      elements.add(const Text("Cadet Branches:"));
+      elements.add(const Text("🏰 Cadet Branches:"));
       for (var cadetBranch in house.cadetBranches) {
         elements.add(Text(cadetBranch));
       }
@@ -136,7 +136,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.swornMembers.isNotEmpty) {
-      elements.add(const Text("Members:"));
+      elements.add(const Text("👱 Members:"));
       for (int i = 0; i < house.swornMembers.length; i++) {
         elements.add(
           FutureBuilder(
