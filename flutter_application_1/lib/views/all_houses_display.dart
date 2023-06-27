@@ -11,7 +11,7 @@ class AllHousesDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
-    for (var house in allHouses) {
+    for (House house in allHouses) {
       elements.add(
         ElevatedButton(
           style: ElevatedButton.styleFrom(

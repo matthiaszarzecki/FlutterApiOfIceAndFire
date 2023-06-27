@@ -36,19 +36,19 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    var url = Uri.parse(
+    Uri uri = Uri.parse(
         'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize');
-    final response = await http.get(url);
+    final response = await http.get(uri);
 
     setState(
       () {
         if (response.statusCode >= 200 && response.statusCode <= 299) {
-          var newHouses =
+          List<House> newHouses =
               AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
 
           if (newHouses.isNotEmpty) {
             state = AllHousesLoaderState.resultsAndLoadingMore;
-            for (var house in newHouses) {
+            for (House house in newHouses) {
               allHouses.add(house);
             }
           } else {
