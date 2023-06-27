@@ -1,16 +1,42 @@
-# flutter_application_1
+# Fluttr Api Of Ice And Fire
 
-A new Flutter project.
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://twitter.com/matthias_code) [![License: CC BY-SA 3.0](https://img.shields.io/badge/License-CC%20BY--SA%203.0-red.svg)](https://creativecommons.org/licenses/by-sa/3.0/) [![Twitter Follow](https://img.shields.io/twitter/follow/matthias_code?style=social)](https://twitter.com/matthias_code) [![Mastodon Follow](https://img.shields.io/mastodon/follow/109324799475945668?domain=https%3A%2F%2Fmastodon.cloud&style=social)](https://mastodon.cloud/@matthias_code) [![Youtube Subscribe](https://img.shields.io/youtube/channel/subscribers/UCvMdsKesM05bIG0eq7M5z1g?style=social)](https://www.youtube.com/channel/UCvMdsKesM05bIG0eq7M5z1g?sub_confirmation=1)
 
-## Getting Started
+A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [API of Ice And Fire](https://anapioficeandfire.com/).
 
-This project is a starting point for a Flutter application.
+### Contains
+- Nested Calls
+- Native API Calls
+- Pagination
+- Graceful Failure - elements that do not exist (yet) are not shown instead of showing empty elements or errors
+- Detailed House-View
+- List of all Houses
+- Elegant in-view error-handling on SingleHouse (no popups!)
 
-A few resources to get you started if this is your first Flutter project:
+### Contains:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Detailed comments
+- Small Screen Support
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### TODO:
+- Continuous Integration with BitRise
+- Unit-Tests
+- Improved Accessibility Features
+- Nicer Views
+- Character View
+- Timeouts
+- Unit-Tests
+
+### Nice to Have:
+- Fastlane function to create screenshots for this readme
+- CodeCov integration in CICD
+- Monkey-Tests
+- Fetch nested data for Characters
+- UI-Tests
+- Dark Color Scheme & scheme switching
+- Automated tests for error-handling
+- Data Caching (Realm or CoreData)
+- Welcome Tab with House of the Day View
+
+Created by Matthias Zarzecki, 2023-06
+
