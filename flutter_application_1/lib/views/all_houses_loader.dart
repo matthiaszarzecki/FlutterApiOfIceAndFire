@@ -78,11 +78,10 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    title: Text(house.name),
-                                  ),
-                                  body: SingleHouseLoader(house: house)
-                                )),
+                                appBar: AppBar(
+                                  title: Text(house.name),
+                                ),
+                                body: SingleHouseLoader(house: house))),
                       );
                     },
                   ),
