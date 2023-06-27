@@ -18,6 +18,10 @@ class House {
   final List<dynamic> cadetBranches;
   final List<dynamic> swornMembers;
 
+  String initial() {
+    return name[6];
+  }
+
   const House({
     required this.name,
     required this.region,
