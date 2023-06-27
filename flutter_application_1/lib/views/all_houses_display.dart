@@ -14,6 +14,9 @@ class AllHousesDisplay extends StatelessWidget {
     for (var house in allHouses) {
       elements.add(
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            textStyle: const TextStyle(fontSize: 14),
+          ),
           child: Text(house.name),
           onPressed: () {
             // Navigate to route
