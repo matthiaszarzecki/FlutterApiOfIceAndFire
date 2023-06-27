@@ -37,12 +37,15 @@ class HouseUpdated {
   String words = "";
 
   Future<Character?>? currentLord;
+  List<Future<Character?>?> swornMembers = [];
 
   HouseUpdated(House house) {
     name = house.name;
     region = house.region;
     coatOfArms = house.coatOfArms;
     words = house.words;
+
+    //swornMembers = List<Future<Character?>?>.filled(house.swornMembers.length, null);
   }
 }
 
@@ -60,6 +63,15 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
         houseUpdated.currentLord = _loadCharacter(widget.house.currentLord);
       });
     }
+
+    if (widget.house.swornMembers.isNotEmpty) {
+      for (String characterURL in widget.house.swornMembers) {
+        setState(() {
+          Future<Character?> newCharacter = _loadCharacter(characterURL);
+          houseUpdated.swornMembers.add(newCharacter);
+        });
+      }
+    }
   }
 
   Future<Character?> _loadCharacter(String characterURL) async {
@@ -72,13 +84,13 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
     } else {
       return null;
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleHouseDisplay(house: widget.house, houseUpdated: houseUpdated),
+      child:
+          SingleHouseDisplay(house: widget.house, houseUpdated: houseUpdated),
     );
   }
 }

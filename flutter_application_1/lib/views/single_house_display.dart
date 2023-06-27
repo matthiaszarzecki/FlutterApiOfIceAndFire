@@ -31,14 +31,15 @@ class SingleHouseDisplay extends StatelessWidget {
     if (houseUpdated.currentLord != null) {
       elements.add(
         FutureBuilder(
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                Character character = snapshot.data as Character;
-                return Text("Current Lord: ${character.name}");
-              }
-              return const SizedBox(height: 0);
-            },
-            future: houseUpdated.currentLord),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              Character character = snapshot.data as Character;
+              return Text("Current Lord: ${character.name}");
+            }
+            return const SizedBox(height: 0);
+          },
+          future: houseUpdated.currentLord,
+        ),
       );
       elements.add(const SizedBox(height: 10));
     }
@@ -102,10 +103,20 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.swornMembers.isNotEmpty) {
       elements.add(const Text("Members:"));
-      for (var member in house.swornMembers) {
-        elements.add(Text(member));
+      for (int i = 0; i < house.swornMembers.length; i++) {
+        elements.add(
+          FutureBuilder(
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                Character character = snapshot.data as Character;
+                return Text(character.name);
+              }
+              return const SizedBox(height: 0);
+            },
+            future: houseUpdated.swornMembers[i],
+          ),
+        );
       }
-      elements.add(const SizedBox(height: 10));
     }
 
     return ListView(children: elements);

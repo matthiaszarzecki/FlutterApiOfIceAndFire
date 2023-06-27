@@ -23,11 +23,13 @@ class AllHousesDisplay extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Scaffold(
-                      appBar: AppBar(
-                        title: Text(house.name),
-                      ),
-                      body: SingleHouseLoader(house: house))),
+                builder: (context) => Scaffold(
+                  appBar: AppBar(
+                    title: Text(house.name),
+                  ),
+                  body: SingleHouseLoader(house: house),
+                ),
+              ),
             );
           },
         ),
