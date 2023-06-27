@@ -9,8 +9,8 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 <img src="media/screenshot_01.png">|<img src="media/screenshot_02.png">|
 
 ### Contains:
-- Nested Calls
 - Native API Calls
+- Nested Calls
 - Pagination
 - Graceful Failure - elements that do not exist (yet) are not shown instead of showing empty elements or errors
 - Detailed House-View
@@ -18,10 +18,10 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Elegant in-view error-handling on SingleHouse (no popups!)
 - Small Screen Support
 - Continuous Integration with BitRise
-- Icons iOS
+- Icons on iOS
 
 ### TODO:
-- Icons Android
+- Icons on Android
 - Unit-Tests
 - Improved Accessibility Features
 - Nicer Views
