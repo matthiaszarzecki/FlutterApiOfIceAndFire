@@ -12,13 +12,11 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Detailed House-View
 - List of all Houses
 - Elegant in-view error-handling on SingleHouse (no popups!)
-
-### Contains:
-
-- Detailed comments
 - Small Screen Support
 
 ### TODO:
+- Icons iOS
+- Icons Android
 - Continuous Integration with BitRise
 - Unit-Tests
 - Improved Accessibility Features
