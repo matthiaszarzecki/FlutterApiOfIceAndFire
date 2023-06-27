@@ -4,10 +4,8 @@ import 'package:flutter_application_1/models/house_updated.dart';
 import 'package:flutter/material.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
-  const SingleHouseDisplay(
-      {super.key, required this.houseBasic, required this.houseUpdated});
+  const SingleHouseDisplay({super.key, required this.houseUpdated});
 
-  final HouseBasic houseBasic;
   final HouseUpdated houseUpdated;
 
   Widget _listSpacer() {
@@ -136,9 +134,9 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
-    if (houseBasic.cadetBranches.isNotEmpty) {
+    if (houseUpdated.cadetBranches.isNotEmpty) {
       elements.add(const Text("🏰 Cadet Branches:"));
-      for (int i = 0; i < houseBasic.cadetBranches.length; i++) {
+      for (int i = 0; i < houseUpdated.cadetBranches.length; i++) {
         elements.add(
           FutureBuilder(
             builder: (context, snapshot) {
@@ -155,9 +153,9 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
-    if (houseBasic.swornMembers.isNotEmpty) {
+    if (houseUpdated.swornMembers.isNotEmpty) {
       elements.add(const Text("👱 Members:"));
-      for (int i = 0; i < houseBasic.swornMembers.length; i++) {
+      for (int i = 0; i < houseUpdated.swornMembers.length; i++) {
         elements.add(
           FutureBuilder(
             builder: (context, snapshot) {
