@@ -45,8 +45,19 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
-    if (house.heir.isNotEmpty) {
-      elements.add(Text("Heir: ${house.heir.toString()}"));
+    if (houseUpdated.currentLord != null) {
+      elements.add(
+        FutureBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              Character character = snapshot.data as Character;
+              return Text("Heir: ${character.name}");
+            }
+            return const SizedBox(height: 0);
+          },
+          future: houseUpdated.heir,
+        ),
+      );
       elements.add(const SizedBox(height: 10));
     }
 

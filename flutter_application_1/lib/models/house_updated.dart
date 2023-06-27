@@ -9,6 +9,7 @@ class HouseUpdated {
   String words = "";
 
   Future<Character?>? currentLord;
+  Future<Character?>? heir;
   List<Future<Character?>?> swornMembers = [];
 
   HouseUpdated(HouseBasic house) {

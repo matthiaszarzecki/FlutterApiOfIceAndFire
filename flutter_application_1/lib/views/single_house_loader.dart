@@ -30,6 +30,12 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
       });
     }
 
+    if (widget.house.heir.isNotEmpty) {
+      setState(() {
+        houseUpdated.heir = _loadCharacter(widget.house.heir);
+      });
+    }
+
     if (widget.house.swornMembers.isNotEmpty) {
       for (String characterURL in widget.house.swornMembers) {
         setState(() {
