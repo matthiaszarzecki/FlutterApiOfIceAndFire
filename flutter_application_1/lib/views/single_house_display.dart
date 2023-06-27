@@ -10,23 +10,32 @@ class SingleHouseDisplay extends StatelessWidget {
   final HouseBasic house;
   final HouseUpdated houseUpdated;
 
+  Widget _listSpacer() {
+    return const SizedBox(height: 10);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
     if (house.region.isNotEmpty) {
-      elements.add(Text("of ${house.region.toString()}"));
-      elements.add(const SizedBox(height: 10));
+      elements.add(
+        Text(
+          "of ${house.region.toString()}",
+          textAlign: TextAlign.center,
+        ),
+      );
+      elements.add(_listSpacer());
     }
 
     if (house.coatOfArms.isNotEmpty) {
       elements.add(Text("🛡️ ${house.coatOfArms.toString()}"));
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.words.isNotEmpty) {
       elements.add(Text("🪶 ${house.words.toString()}"));
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (houseUpdated.currentLord != null) {
@@ -42,7 +51,7 @@ class SingleHouseDisplay extends StatelessWidget {
           future: houseUpdated.currentLord,
         ),
       );
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (houseUpdated.heir != null) {
@@ -58,7 +67,7 @@ class SingleHouseDisplay extends StatelessWidget {
           future: houseUpdated.heir,
         ),
       );
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (houseUpdated.founder != null) {
@@ -74,7 +83,7 @@ class SingleHouseDisplay extends StatelessWidget {
           future: houseUpdated.founder,
         ),
       );
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (houseUpdated.overlord != null) {
@@ -90,17 +99,17 @@ class SingleHouseDisplay extends StatelessWidget {
           future: houseUpdated.overlord,
         ),
       );
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.founded.isNotEmpty) {
       elements.add(Text("📜 Founded: ${house.founded.toString()}"));
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.diedOut.isNotEmpty) {
       elements.add(Text("💀 Died out: ${house.diedOut.toString()}"));
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.titles.length > 1) {
@@ -108,7 +117,7 @@ class SingleHouseDisplay extends StatelessWidget {
       for (var title in house.titles) {
         elements.add(Text(title));
       }
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.seats.length > 1) {
@@ -116,7 +125,7 @@ class SingleHouseDisplay extends StatelessWidget {
       for (var seat in house.seats) {
         elements.add(Text(seat));
       }
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
 
     if (house.ancestralWeapons.length > 1) {
@@ -124,9 +133,9 @@ class SingleHouseDisplay extends StatelessWidget {
       for (var weapon in house.ancestralWeapons) {
         elements.add(Text("🗡️ ${weapon.toString()}"));
       }
-      elements.add(const SizedBox(height: 10));
+      elements.add(_listSpacer());
     }
-    
+
     if (house.cadetBranches.isNotEmpty) {
       elements.add(const Text("🏰 Cadet Branches:"));
       for (int i = 0; i < house.cadetBranches.length; i++) {
@@ -143,6 +152,7 @@ class SingleHouseDisplay extends StatelessWidget {
           ),
         );
       }
+      elements.add(_listSpacer());
     }
 
     if (house.swornMembers.isNotEmpty) {
