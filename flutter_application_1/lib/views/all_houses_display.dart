@@ -26,7 +26,7 @@ class AllHousesDisplay extends StatelessWidget {
                   appBar: AppBar(
                     title: Text(house.name),
                   ),
-                  body: SingleHouseLoader(house: house),
+                  body: SingleHouseLoader(houseBasic: house),
                 ),
               ),
             );

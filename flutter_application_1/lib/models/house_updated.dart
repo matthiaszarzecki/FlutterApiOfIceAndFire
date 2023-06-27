@@ -7,6 +7,12 @@ class HouseUpdated {
   String region = "";
   String coatOfArms = "";
   String words = "";
+  String founded = "";
+  String diedOut = "";
+
+  List<dynamic> titles = [];
+  List<dynamic> seats = [];
+  List<dynamic> ancestralWeapons = [];
 
   Future<Character?>? currentLord;
   Future<Character?>? heir;
@@ -21,5 +27,11 @@ class HouseUpdated {
     region = house.region;
     coatOfArms = house.coatOfArms;
     words = house.words;
+    founded = house.founded;
+    diedOut = house.diedOut;
+
+    titles = house.titles;
+    seats = house.seats;
+    ancestralWeapons = house.ancestralWeapons;
   }
 }

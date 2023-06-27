@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
   const SingleHouseDisplay(
-      {super.key, required this.house, required this.houseUpdated});
+      {super.key, required this.houseBasic, required this.houseUpdated});
 
-  final HouseBasic house;
+  final HouseBasic houseBasic;
   final HouseUpdated houseUpdated;
 
   Widget _listSpacer() {
@@ -18,23 +18,23 @@ class SingleHouseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
-    if (house.region.isNotEmpty) {
+    if (houseUpdated.region.isNotEmpty) {
       elements.add(
         Text(
-          "of ${house.region.toString()}",
+          "of ${houseUpdated.region.toString()}",
           textAlign: TextAlign.center,
         ),
       );
       elements.add(_listSpacer());
     }
 
-    if (house.coatOfArms.isNotEmpty) {
-      elements.add(Text("🛡️ ${house.coatOfArms.toString()}"));
+    if (houseUpdated.coatOfArms.isNotEmpty) {
+      elements.add(Text("🛡️ ${houseUpdated.coatOfArms.toString()}"));
       elements.add(_listSpacer());
     }
 
-    if (house.words.isNotEmpty) {
-      elements.add(Text("🪶 ${house.words.toString()}"));
+    if (houseUpdated.words.isNotEmpty) {
+      elements.add(Text("🪶 ${houseUpdated.words.toString()}"));
       elements.add(_listSpacer());
     }
 
@@ -102,43 +102,43 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
-    if (house.founded.isNotEmpty) {
-      elements.add(Text("📜 Founded: ${house.founded.toString()}"));
+    if (houseUpdated.founded.isNotEmpty) {
+      elements.add(Text("📜 Founded: ${houseUpdated.founded.toString()}"));
       elements.add(_listSpacer());
     }
 
-    if (house.diedOut.isNotEmpty) {
-      elements.add(Text("💀 Died out: ${house.diedOut.toString()}"));
+    if (houseUpdated.diedOut.isNotEmpty) {
+      elements.add(Text("💀 Died out: ${houseUpdated.diedOut.toString()}"));
       elements.add(_listSpacer());
     }
 
-    if (house.titles.length > 1) {
+    if (houseUpdated.titles.length > 1) {
       elements.add(const Text("🎖️ Titles:"));
-      for (var title in house.titles) {
+      for (var title in houseUpdated.titles) {
         elements.add(Text(title));
       }
       elements.add(_listSpacer());
     }
 
-    if (house.seats.length > 1) {
+    if (houseUpdated.seats.length > 1) {
       elements.add(const Text("🏰 Seats:"));
-      for (var seat in house.seats) {
+      for (var seat in houseUpdated.seats) {
         elements.add(Text(seat));
       }
       elements.add(_listSpacer());
     }
 
-    if (house.ancestralWeapons.length > 1) {
+    if (houseUpdated.ancestralWeapons.length > 1) {
       elements.add(const Text("Ancestral Weapons:"));
-      for (var weapon in house.ancestralWeapons) {
+      for (var weapon in houseUpdated.ancestralWeapons) {
         elements.add(Text("🗡️ ${weapon.toString()}"));
       }
       elements.add(_listSpacer());
     }
 
-    if (house.cadetBranches.isNotEmpty) {
+    if (houseBasic.cadetBranches.isNotEmpty) {
       elements.add(const Text("🏰 Cadet Branches:"));
-      for (int i = 0; i < house.cadetBranches.length; i++) {
+      for (int i = 0; i < houseBasic.cadetBranches.length; i++) {
         elements.add(
           FutureBuilder(
             builder: (context, snapshot) {
@@ -155,9 +155,9 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
-    if (house.swornMembers.isNotEmpty) {
+    if (houseBasic.swornMembers.isNotEmpty) {
       elements.add(const Text("👱 Members:"));
-      for (int i = 0; i < house.swornMembers.length; i++) {
+      for (int i = 0; i < houseBasic.swornMembers.length; i++) {
         elements.add(
           FutureBuilder(
             builder: (context, snapshot) {

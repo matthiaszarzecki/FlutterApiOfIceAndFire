@@ -7,9 +7,9 @@ import 'package:http/http.dart' as http;
 import 'single_house_display.dart';
 
 class SingleHouseLoader extends StatefulWidget {
-  const SingleHouseLoader({super.key, required this.house});
+  const SingleHouseLoader({super.key, required this.houseBasic});
 
-  final HouseBasic house;
+  final HouseBasic houseBasic;
 
   @override
   State<SingleHouseLoader> createState() => _SingleHouseLoaderState();
@@ -22,30 +22,34 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
   void initState() {
     super.initState();
 
-    houseUpdated = HouseUpdated(widget.house);
+    houseUpdated = HouseUpdated(widget.houseBasic);
+    _loadNestedData();
+  }
 
+  void _loadNestedData() {
     // Nested Characters
 
-    if (widget.house.currentLord.isNotEmpty) {
+    if (widget.houseBasic.currentLord.isNotEmpty) {
       setState(() {
-        houseUpdated.currentLord = _loadCharacter(widget.house.currentLord);
+        houseUpdated.currentLord =
+            _loadCharacter(widget.houseBasic.currentLord);
       });
     }
 
-    if (widget.house.heir.isNotEmpty) {
+    if (widget.houseBasic.heir.isNotEmpty) {
       setState(() {
-        houseUpdated.heir = _loadCharacter(widget.house.heir);
+        houseUpdated.heir = _loadCharacter(widget.houseBasic.heir);
       });
     }
 
-    if (widget.house.founder.isNotEmpty) {
+    if (widget.houseBasic.founder.isNotEmpty) {
       setState(() {
-        houseUpdated.founder = _loadCharacter(widget.house.founder);
+        houseUpdated.founder = _loadCharacter(widget.houseBasic.founder);
       });
     }
 
-    if (widget.house.swornMembers.isNotEmpty) {
-      for (String characterURL in widget.house.swornMembers) {
+    if (widget.houseBasic.swornMembers.isNotEmpty) {
+      for (String characterURL in widget.houseBasic.swornMembers) {
         setState(() {
           Future<Character?> newCharacter = _loadCharacter(characterURL);
           houseUpdated.swornMembers.add(newCharacter);
@@ -55,14 +59,14 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     // Nested Houses
 
-    if (widget.house.overlord.isNotEmpty) {
+    if (widget.houseBasic.overlord.isNotEmpty) {
       setState(() {
-        houseUpdated.overlord = _loadSingleHouse(widget.house.overlord);
+        houseUpdated.overlord = _loadSingleHouse(widget.houseBasic.overlord);
       });
     }
 
-    if (widget.house.cadetBranches.isNotEmpty) {
-      for (String houseURL in widget.house.cadetBranches) {
+    if (widget.houseBasic.cadetBranches.isNotEmpty) {
+      for (String houseURL in widget.houseBasic.cadetBranches) {
         setState(() {
           Future<HouseBasic?> newHouse = _loadSingleHouse(houseURL);
           houseUpdated.cadetBranches.add(newHouse);
@@ -98,8 +102,8 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child:
-          SingleHouseDisplay(house: widget.house, houseUpdated: houseUpdated),
+      child: SingleHouseDisplay(
+          houseBasic: widget.houseBasic, houseUpdated: houseUpdated),
     );
   }
 }
