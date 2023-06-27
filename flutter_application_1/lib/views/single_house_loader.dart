@@ -24,6 +24,8 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     houseUpdated = HouseUpdated(widget.house);
 
+    // Nested Characters
+
     if (widget.house.currentLord.isNotEmpty) {
       setState(() {
         houseUpdated.currentLord = _loadCharacter(widget.house.currentLord);
@@ -50,6 +52,14 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
         });
       }
     }
+
+    // Nested Houses
+
+    if (widget.house.overlord.isNotEmpty) {
+      setState(() {
+        houseUpdated.overlord = _loadSingleHouse(widget.house.overlord);
+      });
+    }
   }
 
   Future<Character?> _loadCharacter(String characterURL) async {
@@ -59,6 +69,18 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       Character character = Character.fromJson(jsonDecode(response.body));
       return character;
+    } else {
+      return null;
+    }
+  }
+
+  Future<HouseBasic?> _loadSingleHouse(String houseURL) async {
+    Uri uri = Uri.parse(houseURL);
+    final response = await http.get(uri);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      HouseBasic houseBasic = HouseBasic.fromJson(jsonDecode(response.body));
+      return houseBasic;
     } else {
       return null;
     }

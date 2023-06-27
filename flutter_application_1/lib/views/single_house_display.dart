@@ -77,8 +77,19 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
-    if (house.overlord.isNotEmpty) {
-      elements.add(Text("Overlord: ${house.overlord.toString()}"));
+    if (houseUpdated.overlord != null) {
+      elements.add(
+        FutureBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              HouseBasic houseBasic = snapshot.data as HouseBasic;
+              return Text("Overlord: ${houseBasic.name}");
+            }
+            return const SizedBox(height: 0);
+          },
+          future: houseUpdated.overlord,
+        ),
+      );
       elements.add(const SizedBox(height: 10));
     }
 

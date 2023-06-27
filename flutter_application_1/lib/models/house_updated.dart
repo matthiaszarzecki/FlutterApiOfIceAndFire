@@ -13,6 +13,8 @@ class HouseUpdated {
   Future<Character?>? founder;
   List<Future<Character?>?> swornMembers = [];
 
+  Future<HouseBasic?>? overlord;
+
   HouseUpdated(HouseBasic house) {
     name = house.name;
     region = house.region;
