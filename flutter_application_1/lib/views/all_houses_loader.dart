@@ -25,11 +25,12 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    final response = await http.get(Uri.parse(
-        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize'));
+    var url = Uri.parse(
+        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize');
+    final response = await http.get(url);
 
     setState(() {
-      if (response.statusCode == 200) {
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
         var newHouses =
             AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
         for (var house in newHouses) {
@@ -37,24 +38,15 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         }
 
         currentPage++;
+
+        // Check if succesful, but no more houses - then stop further pagination, hide spinner
       } else {
-        // Error handling
+        // Error Handling
       }
     });
   }
 
-  Future<AllHousesResponse> loadAllHouses() async {
-    final response = await http.get(Uri.parse(
-        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize'));
-
-    if (response.statusCode == 200) {
-      return AllHousesResponse.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  ScrollController controller() {
+  ScrollController _paginationController() {
     ScrollController scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
@@ -74,7 +66,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
       ),
       body: Center(
         child: ListView.builder(
-          controller: controller(),
+          controller: _paginationController(),
           itemCount: allHouses.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index < allHouses.length) {
@@ -104,7 +96,6 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     );
   }
 }
-
 
 /*
 FutureBuilder<AllHousesResponse>(
