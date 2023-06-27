@@ -45,7 +45,7 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
-    if (houseUpdated.currentLord != null) {
+    if (houseUpdated.heir != null) {
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -61,6 +61,22 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
+    if (houseUpdated.founder != null) {
+      elements.add(
+        FutureBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              Character character = snapshot.data as Character;
+              return Text("Founder: ${character.name}");
+            }
+            return const SizedBox(height: 0);
+          },
+          future: houseUpdated.founder,
+        ),
+      );
+      elements.add(const SizedBox(height: 10));
+    }
+
     if (house.overlord.isNotEmpty) {
       elements.add(Text("Overlord: ${house.overlord.toString()}"));
       elements.add(const SizedBox(height: 10));
@@ -68,11 +84,6 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.founded.isNotEmpty) {
       elements.add(Text("Founded: ${house.founded.toString()}"));
-      elements.add(const SizedBox(height: 10));
-    }
-
-    if (house.founder.isNotEmpty) {
-      elements.add(Text("Founder: ${house.founder.toString()}"));
       elements.add(const SizedBox(height: 10));
     }
 

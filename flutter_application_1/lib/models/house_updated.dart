@@ -10,6 +10,7 @@ class HouseUpdated {
 
   Future<Character?>? currentLord;
   Future<Character?>? heir;
+  Future<Character?>? founder;
   List<Future<Character?>?> swornMembers = [];
 
   HouseUpdated(HouseBasic house) {
