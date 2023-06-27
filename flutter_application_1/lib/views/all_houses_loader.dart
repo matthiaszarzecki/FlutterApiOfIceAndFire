@@ -1,6 +1,6 @@
-import '../models/house.dart';
+import '../models/all_houses_response.dart';
 import 'dart:convert';
-import 'package:flutter_application_1/views/all_houses_display.dart';
+import 'package:flutter_application_1/views/single_house_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,44 +13,56 @@ class AllHousesLoader extends StatefulWidget {
   State<AllHousesLoader> createState() => _AllHousesLoaderState();
 }
 
-class AllHousesResponse {
-  final List<House> houses;
-
-  AllHousesResponse({required this.houses});
-
-  factory AllHousesResponse.fromJson(List<dynamic> json) {
-    List<House> houses = [];
-    for (var house in json) {
-      houses.add(House.fromJson(house));
-    }
-    return AllHousesResponse(houses: houses);
-  }
-}
-
 class _AllHousesLoaderState extends State<AllHousesLoader> {
-  late Future<AllHousesResponse> futureAllHouses;
+  var currentPage = 1;
+  var pageSize = 50;
+  var allHouses = [];
 
   @override
   void initState() {
     super.initState();
-    futureAllHouses = loadAllHouses();
+    _loadMoreHouses();
   }
 
-  void _loadAllHouses() {
+  void _loadMoreHouses() async {
+    final response = await http.get(Uri.parse(
+        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize'));
+
     setState(() {
-      futureAllHouses = loadAllHouses();
+      if (response.statusCode == 200) {
+        var newHouses =
+            AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
+        for (var house in newHouses) {
+          allHouses.add(house);
+        }
+
+        currentPage++;
+      } else {
+        // Error handling
+      }
     });
   }
 
   Future<AllHousesResponse> loadAllHouses() async {
     final response = await http.get(Uri.parse(
-        'https://anapioficeandfire.com/api/houses?page=1&pageSize=50'));
+        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize'));
 
     if (response.statusCode == 200) {
       return AllHousesResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load data');
     }
+  }
+
+  ScrollController controller() {
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        _loadMoreHouses();
+      }
+    });
+    return scrollController;
   }
 
   @override
@@ -61,12 +73,73 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: FutureBuilder<AllHousesResponse>(
+          child: ListView.builder(
+              controller: controller(),
+              itemCount: allHouses.length,
+              itemBuilder: (BuildContext context, int index) => ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 14),
+                    ),
+                    child: Text(allHouses[index].name),
+                    onPressed: () {
+                      // Navigate to route
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  title: Text(allHouses[index].name),
+                                ),
+                                body: SingleHouseLoader(
+                                    house: allHouses[index]))),
+                      );
+                    },
+                  ))),
+    );
+  }
+}
+
+
+/*
+FutureBuilder<AllHousesResponse>(
           future: futureAllHouses,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final allHouses = snapshot.data!.houses;
-              return AllHousesDisplay(allHouses: allHouses);
+
+              ScrollController scrollController = ScrollController();
+              scrollController.addListener(() {
+                if (scrollController.position.maxScrollExtent ==
+                    scrollController.position.pixels) {
+                  print("End of list reached");
+                }
+              });
+
+              return ListView.builder(
+                  controller: scrollController,
+                  itemCount: allHouses.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 14),
+                        ),
+                        child: Text(allHouses[index].name),
+                        onPressed: () {
+                          // Navigate to route
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Scaffold(
+                                    appBar: AppBar(
+                                      title: Text(allHouses[index].name),
+                                    ),
+                                    body: SingleHouseLoader(
+                                        house: allHouses[index]))),
+                          );
+                        },
+                      ));
+
+              //return AllHousesDisplay(allHouses: allHouses);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -74,14 +147,5 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
             return const CircularProgressIndicator();
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loadAllHouses,
-        tooltip: 'Refresh',
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        child: const Icon(Icons.refresh),
-      ),
-    );
-  }
-}
+
+        */

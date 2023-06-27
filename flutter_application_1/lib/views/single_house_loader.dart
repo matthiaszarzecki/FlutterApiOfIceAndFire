@@ -47,19 +47,6 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleHouseDisplay(house: widget.house),
-      /*child: FutureBuilder<House>(
-        future: futureHouse,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final house = snapshot.data!;
-            return SingleHouseDisplay(house: house);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-
-          return const CircularProgressIndicator();
-        },
-      ),*/
     );
   }
 }
