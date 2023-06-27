@@ -95,10 +95,18 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
                 },
               );
             } else {
-              return const SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
+              return const UnconstrainedBox(
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: 26,
+                      height: 26,
+                      child: CircularProgressIndicator(),
+                    ),
+                    SizedBox(height: 46),
+                  ],
+                ),
               );
             }
           },
