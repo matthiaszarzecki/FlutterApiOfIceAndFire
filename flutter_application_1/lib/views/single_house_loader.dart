@@ -60,6 +60,15 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
         houseUpdated.overlord = _loadSingleHouse(widget.house.overlord);
       });
     }
+
+    if (widget.house.cadetBranches.isNotEmpty) {
+      for (String houseURL in widget.house.cadetBranches) {
+        setState(() {
+          Future<HouseBasic?> newHouse = _loadSingleHouse(houseURL);
+          houseUpdated.cadetBranches.add(newHouse);
+        });
+      }
+    }
   }
 
   Future<Character?> _loadCharacter(String characterURL) async {

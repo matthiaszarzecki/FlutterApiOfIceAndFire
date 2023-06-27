@@ -126,13 +126,23 @@ class SingleHouseDisplay extends StatelessWidget {
       }
       elements.add(const SizedBox(height: 10));
     }
-
+    
     if (house.cadetBranches.isNotEmpty) {
       elements.add(const Text("🏰 Cadet Branches:"));
-      for (var cadetBranch in house.cadetBranches) {
-        elements.add(Text(cadetBranch));
+      for (int i = 0; i < house.cadetBranches.length; i++) {
+        elements.add(
+          FutureBuilder(
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                HouseBasic houseBasic = snapshot.data as HouseBasic;
+                return Text(houseBasic.name);
+              }
+              return const SizedBox(height: 0);
+            },
+            future: houseUpdated.cadetBranches[i],
+          ),
+        );
       }
-      elements.add(const SizedBox(height: 10));
     }
 
     if (house.swornMembers.isNotEmpty) {

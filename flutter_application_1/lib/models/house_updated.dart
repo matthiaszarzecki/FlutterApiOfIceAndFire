@@ -14,6 +14,7 @@ class HouseUpdated {
   List<Future<Character?>?> swornMembers = [];
 
   Future<HouseBasic?>? overlord;
+  List<Future<HouseBasic?>?> cadetBranches = [];
 
   HouseUpdated(HouseBasic house) {
     name = house.name;
