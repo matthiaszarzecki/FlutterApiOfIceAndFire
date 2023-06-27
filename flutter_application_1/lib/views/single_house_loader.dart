@@ -1,6 +1,6 @@
-import '../models/house.dart';
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter_application_1/models/house.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'single_house_display.dart';

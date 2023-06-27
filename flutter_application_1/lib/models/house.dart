@@ -4,7 +4,7 @@ class House {
   final String coatOfArms;
   final String words;
   
-  final List<dynamic> titles; // TODO: Figure out how to do string arrays
+  final List<dynamic> titles;
   final List<dynamic> seats;
 
   final String currentLord;

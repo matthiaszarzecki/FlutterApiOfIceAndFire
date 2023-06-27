@@ -1,5 +1,6 @@
-import '../models/all_houses_response.dart';
 import 'dart:convert';
+import 'package:flutter_application_1/models/all_houses_response.dart';
+import 'package:flutter_application_1/views/loading_spinner.dart';
 import 'package:flutter_application_1/views/single_house_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,10 +14,18 @@ class AllHousesLoader extends StatefulWidget {
   State<AllHousesLoader> createState() => _AllHousesLoaderState();
 }
 
+enum AllHousesLoaderState {
+  loadingInitial,
+  resultsAndLoadingMore,
+  resultsAndNotLoadingMore,
+  error
+}
+
 class _AllHousesLoaderState extends State<AllHousesLoader> {
   var currentPage = 1;
   var pageSize = 50;
   var allHouses = [];
+  var state = AllHousesLoaderState.loadingInitial;
 
   @override
   void initState() {
@@ -42,7 +51,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
 
           // Check if succesful, but no more houses - then stop further pagination, hide spinner
         } else {
-          // Error Handling
+          state = AllHousesLoaderState.error;
         }
       },
     );
@@ -95,19 +104,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
                 },
               );
             } else {
-              return const UnconstrainedBox(
-                child: Column(
-                  children: [
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 26,
-                      height: 26,
-                      child: CircularProgressIndicator(),
-                    ),
-                    SizedBox(height: 46),
-                  ],
-                ),
-              );
+              return const LoadingSpinner();
             }
           },
         ),
