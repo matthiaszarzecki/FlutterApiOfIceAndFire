@@ -1,4 +1,5 @@
-class House {
+// The house as it is returned from the API.
+class HouseBasic {
   final String name;
   final String region;
   final String coatOfArms;
@@ -22,7 +23,7 @@ class House {
     return name[6];
   }
 
-  const House({
+  const HouseBasic({
     required this.name,
     required this.region,
     required this.coatOfArms,
@@ -40,8 +41,8 @@ class House {
     required this.swornMembers,
   });
 
-  factory House.fromJson(Map<String, dynamic> json) {
-    return House(
+  factory HouseBasic.fromJson(Map<String, dynamic> json) {
+    return HouseBasic(
       name: json['name'],
       region: json['region'],
       coatOfArms: json['coatOfArms'],

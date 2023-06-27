@@ -1,14 +1,14 @@
-import 'package:flutter_application_1/models/house.dart';
+import 'package:flutter_application_1/models/house_basic.dart';
 
 class AllHousesResponse {
   AllHousesResponse({required this.houses});
 
-  final List<House> houses;
+  final List<HouseBasic> houses;
 
   factory AllHousesResponse.fromJson(List<dynamic> json) {
-    List<House> houses = [];
+    List<HouseBasic> houses = [];
     for (var house in json) {
-      houses.add(House.fromJson(house));
+      houses.add(HouseBasic.fromJson(house));
     }
     return AllHousesResponse(houses: houses);
   }

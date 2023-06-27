@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_application_1/models/all_houses_response.dart';
-import 'package:flutter_application_1/models/house.dart';
+import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/views/house_cell.dart';
 import 'package:flutter_application_1/views/loading_spinner.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ enum AllHousesLoaderState {
 
 class _AllHousesLoaderState extends State<AllHousesLoader> {
   int currentPage = 1;
-  List<House> allHouses = [];
+  List<HouseBasic> allHouses = [];
   AllHousesLoaderState state = AllHousesLoaderState.loadingInitial;
 
   final int pageSize = 50;
@@ -43,12 +43,12 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     setState(
       () {
         if (response.statusCode >= 200 && response.statusCode <= 299) {
-          List<House> newHouses =
+          List<HouseBasic> newHouses =
               AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
 
           if (newHouses.isNotEmpty) {
             state = AllHousesLoaderState.resultsAndLoadingMore;
-            for (House house in newHouses) {
+            for (HouseBasic house in newHouses) {
               allHouses.add(house);
             }
           } else {

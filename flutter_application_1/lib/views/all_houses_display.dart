@@ -1,17 +1,17 @@
-import 'package:flutter_application_1/models/house.dart';
+import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/views/single_house_loader.dart';
 import 'package:flutter/material.dart';
 
 class AllHousesDisplay extends StatelessWidget {
   const AllHousesDisplay({super.key, required this.allHouses});
 
-  final List<House> allHouses;
+  final List<HouseBasic> allHouses;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
-    for (House house in allHouses) {
+    for (HouseBasic house in allHouses) {
       elements.add(
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -19,7 +19,6 @@ class AllHousesDisplay extends StatelessWidget {
           ),
           child: Text(house.name),
           onPressed: () {
-            // Navigate to route
             Navigator.push(
               context,
               MaterialPageRoute(

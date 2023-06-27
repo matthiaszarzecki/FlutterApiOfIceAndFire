@@ -1,12 +1,13 @@
-import 'package:flutter_application_1/models/house.dart';
-import 'package:flutter_application_1/views/single_house_loader.dart';
+import 'package:flutter_application_1/models/character.dart';
+import 'package:flutter_application_1/models/house_basic.dart';
+import 'package:flutter_application_1/models/house_updated.dart';
 import 'package:flutter/material.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
   const SingleHouseDisplay(
       {super.key, required this.house, required this.houseUpdated});
 
-  final House house;
+  final HouseBasic house;
   final HouseUpdated houseUpdated;
 
   @override
