@@ -1,6 +1,6 @@
-import 'package:flutter_application_1/views/single_house_loader.dart';
 import '../models/house.dart';
 import 'dart:convert';
+import 'package:flutter_application_1/views/all_houses_display.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -66,29 +66,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final allHouses = snapshot.data!.houses;
-              List<Widget> elements = [];
-
-              for (var house in allHouses) {
-                elements.add(
-                  ElevatedButton(
-                    child: Text(house.name),
-                    onPressed: () {
-                      // Navigate to route
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                appBar: AppBar(
-                                  title: Text(house.name),
-                                ),
-                                body: SingleHouseLoader(house: house))),
-                      );
-                    },
-                  ),
-                );
-              }
-
-              return ListView(children: elements);
+              return AllHousesDisplay(allHouses: allHouses);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
