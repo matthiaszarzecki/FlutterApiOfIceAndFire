@@ -73,28 +73,34 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: ListView.builder(
-              controller: controller(),
-              itemCount: allHouses.length,
-              itemBuilder: (BuildContext context, int index) => ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 14),
+        child: ListView.builder(
+          controller: controller(),
+          itemCount: allHouses.length + 1,
+          itemBuilder: (BuildContext context, int index) {
+            if (index < allHouses.length) {
+              var house = allHouses[index];
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 14),
+                ),
+                child: Text(house.name),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        appBar: AppBar(
+                          title: Text(house.name),
+                        ),
+                        body: SingleHouseLoader(house: house))
                     ),
-                    child: Text(allHouses[index].name),
-                    onPressed: () {
-                      // Navigate to route
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                appBar: AppBar(
-                                  title: Text(allHouses[index].name),
-                                ),
-                                body: SingleHouseLoader(
-                                    house: allHouses[index]))),
-                      );
-                    },
-                  ))),
+                  );
+                },
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          })),
     );
   }
 }

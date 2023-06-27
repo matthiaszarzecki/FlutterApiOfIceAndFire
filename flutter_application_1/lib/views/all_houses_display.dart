@@ -34,6 +34,8 @@ class AllHousesDisplay extends StatelessWidget {
       );
     }
 
+    elements.add(const CircularProgressIndicator());
+
     return ListView(children: elements);
   }
 }
