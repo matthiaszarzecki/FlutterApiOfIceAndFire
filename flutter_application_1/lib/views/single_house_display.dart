@@ -1,10 +1,13 @@
 import 'package:flutter_application_1/models/house.dart';
+import 'package:flutter_application_1/views/single_house_loader.dart';
 import 'package:flutter/material.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
-  const SingleHouseDisplay({super.key, required this.house});
+  const SingleHouseDisplay(
+      {super.key, required this.house, required this.houseUpdated});
 
   final House house;
+  final HouseUpdated houseUpdated;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,18 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(const SizedBox(height: 10));
     }
 
-    if (house.currentLord.isNotEmpty) {
-      elements.add(Text("Current Lord: ${house.currentLord.toString()}"));
+    if (houseUpdated.currentLord != null) {
+      elements.add(
+        FutureBuilder(
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                Character character = snapshot.data as Character;
+                return Text("Current Lord: ${character.name}");
+              }
+              return const SizedBox(height: 0);
+            },
+            future: houseUpdated.currentLord),
+      );
       elements.add(const SizedBox(height: 10));
     }
 
@@ -41,9 +54,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (house.founded.isNotEmpty) {
-      elements.add(
-        Text("Founded: ${house.founded.toString()}")
-      );
+      elements.add(Text("Founded: ${house.founded.toString()}"));
       elements.add(const SizedBox(height: 10));
     }
 
@@ -59,7 +70,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.titles.length > 1) {
       elements.add(const Text("Titles:"));
-      for(var title in house.titles) {
+      for (var title in house.titles) {
         elements.add(Text(title));
       }
       elements.add(const SizedBox(height: 10));
@@ -67,7 +78,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.seats.length > 1) {
       elements.add(const Text("Seats:"));
-      for(var seat in house.seats) {
+      for (var seat in house.seats) {
         elements.add(Text(seat));
       }
       elements.add(const SizedBox(height: 10));
@@ -75,7 +86,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.ancestralWeapons.length > 1) {
       elements.add(const Text("Ancestral Weapons:"));
-      for(var weapon in house.ancestralWeapons) {
+      for (var weapon in house.ancestralWeapons) {
         elements.add(Text("🗡️ ${weapon.toString()}"));
       }
       elements.add(const SizedBox(height: 10));
@@ -83,7 +94,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.cadetBranches.isNotEmpty) {
       elements.add(const Text("Cadet Branches:"));
-      for(var cadetBranch in house.cadetBranches) {
+      for (var cadetBranch in house.cadetBranches) {
         elements.add(Text(cadetBranch));
       }
       elements.add(const SizedBox(height: 10));
@@ -91,7 +102,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (house.swornMembers.isNotEmpty) {
       elements.add(const Text("Members:"));
-      for(var member in house.swornMembers) {
+      for (var member in house.swornMembers) {
         elements.add(Text(member));
       }
       elements.add(const SizedBox(height: 10));
