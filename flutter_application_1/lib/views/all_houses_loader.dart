@@ -29,31 +29,35 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize');
     final response = await http.get(url);
 
-    setState(() {
-      if (response.statusCode >= 200 && response.statusCode <= 299) {
-        var newHouses =
-            AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
-        for (var house in newHouses) {
-          allHouses.add(house);
+    setState(
+      () {
+        if (response.statusCode >= 200 && response.statusCode <= 299) {
+          var newHouses =
+              AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
+          for (var house in newHouses) {
+            allHouses.add(house);
+          }
+
+          currentPage++;
+
+          // Check if succesful, but no more houses - then stop further pagination, hide spinner
+        } else {
+          // Error Handling
         }
-
-        currentPage++;
-
-        // Check if succesful, but no more houses - then stop further pagination, hide spinner
-      } else {
-        // Error Handling
-      }
-    });
+      },
+    );
   }
 
   ScrollController _paginationController() {
     ScrollController scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        _loadMoreHouses();
-      }
-    });
+    scrollController.addListener(
+      () {
+        if (scrollController.position.maxScrollExtent ==
+            scrollController.position.pixels) {
+          _loadMoreHouses();
+        }
+      },
+    );
     return scrollController;
   }
 
@@ -84,65 +88,72 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
                         appBar: AppBar(
                           title: Text(house.name),
                         ),
-                        body: SingleHouseLoader(house: house))
+                        body: SingleHouseLoader(house: house),
+                      ),
                     ),
                   );
                 },
               );
             } else {
-              return const CircularProgressIndicator();
+              return const SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(),
+              );
             }
-          })),
+          },
+        ),
+      ),
     );
   }
 }
 
 /*
 FutureBuilder<AllHousesResponse>(
-          future: futureAllHouses,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final allHouses = snapshot.data!.houses;
+future: futureAllHouses,
+builder: (context, snapshot) {
+  if (snapshot.hasData) {
+    final allHouses = snapshot.data!.houses;
 
-              ScrollController scrollController = ScrollController();
-              scrollController.addListener(() {
-                if (scrollController.position.maxScrollExtent ==
-                    scrollController.position.pixels) {
-                  print("End of list reached");
-                }
-              });
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        print("End of list reached");
+      }
+    });
 
-              return ListView.builder(
-                  controller: scrollController,
-                  itemCount: allHouses.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 14),
-                        ),
-                        child: Text(allHouses[index].name),
-                        onPressed: () {
-                          // Navigate to route
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Scaffold(
-                                    appBar: AppBar(
-                                      title: Text(allHouses[index].name),
-                                    ),
-                                    body: SingleHouseLoader(
-                                        house: allHouses[index]))),
-                          );
-                        },
-                      ));
+    return ListView.builder(
+        controller: scrollController,
+        itemCount: allHouses.length,
+        itemBuilder: (BuildContext context, int index) =>
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 14),
+              ),
+              child: Text(allHouses[index].name),
+              onPressed: () {
+                // Navigate to route
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                          appBar: AppBar(
+                            title: Text(allHouses[index].name),
+                          ),
+                          body: SingleHouseLoader(
+                              house: allHouses[index]))),
+                );
+              },
+            ));
 
-              //return AllHousesDisplay(allHouses: allHouses);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
+    //return AllHousesDisplay(allHouses: allHouses);
+  } else if (snapshot.hasError) {
+    return Text('${snapshot.error}');
+  }
 
-            return const CircularProgressIndicator();
-          },
-        ),
+  return const CircularProgressIndicator();
+},
+),
 
-        */
+*/
