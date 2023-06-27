@@ -4,7 +4,11 @@
 
 A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [API of Ice And Fire](https://anapioficeandfire.com/).
 
-### Contains
+| _ | _ |
+:-------------------------:|:-------------------------:
+<img src="media/screenshot_01.png">|<img src="media/screenshot_02.png">|
+
+### Contains:
 - Nested Calls
 - Native API Calls
 - Pagination
@@ -14,10 +18,9 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Elegant in-view error-handling on SingleHouse (no popups!)
 - Small Screen Support
 - Continuous Integration with BitRise
+- Icons iOS
 
 ### TODO:
-- Screenshots
-- Icons iOS
 - Icons Android
 - Unit-Tests
 - Improved Accessibility Features
@@ -38,4 +41,3 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Welcome Tab with House of the Day View
 
 Created by Matthias Zarzecki, 2023-06
-
