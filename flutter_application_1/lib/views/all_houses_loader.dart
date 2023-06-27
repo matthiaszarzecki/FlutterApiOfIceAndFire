@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_application_1/models/all_houses_response.dart';
+import 'package:flutter_application_1/models/house.dart';
+import 'package:flutter_application_1/views/house_cell.dart';
 import 'package:flutter_application_1/views/loading_spinner.dart';
-import 'package:flutter_application_1/views/single_house_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,10 +23,11 @@ enum AllHousesLoaderState {
 }
 
 class _AllHousesLoaderState extends State<AllHousesLoader> {
-  var currentPage = 1;
-  var pageSize = 50;
-  var allHouses = [];
-  var state = AllHousesLoaderState.loadingInitial;
+  int currentPage = 1;
+  List<House> allHouses = [];
+  AllHousesLoaderState state = AllHousesLoaderState.loadingInitial;
+
+  final int pageSize = 50;
 
   @override
   void initState() {
@@ -43,13 +45,17 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         if (response.statusCode >= 200 && response.statusCode <= 299) {
           var newHouses =
               AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
-          for (var house in newHouses) {
-            allHouses.add(house);
+
+          if (newHouses.isNotEmpty) {
+            state = AllHousesLoaderState.resultsAndLoadingMore;
+            for (var house in newHouses) {
+              allHouses.add(house);
+            }
+          } else {
+            state = AllHousesLoaderState.resultsAndNotLoadingMore;
           }
 
           currentPage++;
-
-          // Check if succesful, but no more houses - then stop further pagination, hide spinner
         } else {
           state = AllHousesLoaderState.error;
         }
@@ -77,38 +83,58 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: ListView.builder(
-          controller: _paginationController(),
-          itemCount: allHouses.length + 1,
-          itemBuilder: (BuildContext context, int index) {
-            if (index < allHouses.length) {
-              var house = allHouses[index];
-              return ElevatedButton(
+      body: allHousesList(context),
+    );
+  }
+
+  Widget allHousesList(BuildContext context) {
+    switch (state) {
+      case AllHousesLoaderState.loadingInitial:
+        return const Center(
+          child: LoadingSpinner(),
+        );
+      case AllHousesLoaderState.resultsAndLoadingMore:
+        return Center(
+          child: ListView.builder(
+            controller: _paginationController(),
+            itemCount: allHouses.length + 1, // +1 for spinner
+            itemBuilder: (BuildContext context, int index) {
+              if (index < allHouses.length) {
+                return HouseCell(house: allHouses[index]);
+              } else {
+                return const LoadingSpinner();
+              }
+            },
+          ),
+        );
+      case AllHousesLoaderState.resultsAndNotLoadingMore:
+        return Center(
+          child: ListView.builder(
+            controller: _paginationController(),
+            itemCount: allHouses.length,
+            itemBuilder: (BuildContext context, int index) {
+              return HouseCell(house: allHouses[index]);
+            },
+          ),
+        );
+      case AllHousesLoaderState.error:
+        return Center(
+          child: Column(
+            children: [
+              const Text("Oh no, something went wrong!"),
+              ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 14),
                 ),
-                child: Text(house.name),
+                child: const Text("Retry!"),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          title: Text(house.name),
-                        ),
-                        body: SingleHouseLoader(house: house),
-                      ),
-                    ),
-                  );
+                  state = AllHousesLoaderState.loadingInitial;
+                  _loadMoreHouses();
                 },
-              );
-            } else {
-              return const LoadingSpinner();
-            }
-          },
-        ),
-      ),
-    );
+              ),
+            ],
+          ),
+        );
+    }
   }
 }
