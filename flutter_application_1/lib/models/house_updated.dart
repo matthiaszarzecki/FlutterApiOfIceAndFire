@@ -9,6 +9,7 @@ class HouseUpdated {
   String words = "";
   String founded = "";
   String diedOut = "";
+  String culture = "";
 
   List<dynamic> titles = [];
   List<dynamic> seats = [];
@@ -29,6 +30,7 @@ class HouseUpdated {
     words = house.words;
     founded = house.founded;
     diedOut = house.diedOut;
+    culture = house.culture;
 
     titles = house.titles;
     seats = house.seats;

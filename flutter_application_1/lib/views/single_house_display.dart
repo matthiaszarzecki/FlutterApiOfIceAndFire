@@ -36,6 +36,11 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
+    if (houseUpdated.culture.isNotEmpty) {
+      elements.add(Text("🚩 ${houseUpdated.culture.toString()}"));
+      elements.add(_listSpacer());
+    }
+
     if (houseUpdated.currentLord != null) {
       elements.add(
         FutureBuilder(
