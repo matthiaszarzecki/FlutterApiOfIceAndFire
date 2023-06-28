@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_application_1/models/all_houses_response.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
+import 'package:flutter_application_1/models/uri_handler.dart';
 import 'package:flutter_application_1/views/house_cell.dart';
 import 'package:flutter_application_1/views/loading_spinner.dart';
 import 'package:flutter/material.dart';
@@ -36,13 +37,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    Uri uri = Uri(
-      scheme: 'https',
-      host: 'anapioficeandfire.com',
-      pathSegments: ['api', 'houses'],
-      queryParameters: {'page': '$currentPage', 'pageSize': '$pageSize'},
-    );
-    final response = await http.get(uri);
+    final response = await http.get(URIHandler.getHousesUri(currentPage));
 
     setState(
       () {
