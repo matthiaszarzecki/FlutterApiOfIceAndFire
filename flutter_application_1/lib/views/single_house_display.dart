@@ -80,7 +80,17 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("👱 Heir: ${character.name}");
+              List<Text> elements = [
+                const Text(
+                  "👱 Heir",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(character.name)
+              ];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: elements,
+              );
             }
             return const SizedBox(height: 0);
           },
@@ -96,7 +106,17 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("👱 Founder: ${character.name}");
+              List<Text> elements = [
+                const Text(
+                  "👱 Founder",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(character.name)
+              ];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: elements,
+              );
             }
             return const SizedBox(height: 0);
           },
@@ -112,7 +132,17 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               HouseBasic houseBasic = snapshot.data as HouseBasic;
-              return Text("🏰 Overlord: ${houseBasic.name}");
+              List<Text> elements = [
+                const Text(
+                  "🏰 Overlord",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(houseBasic.name)
+              ];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: elements,
+              );
             }
             return const SizedBox(height: 0);
           },
@@ -123,17 +153,34 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.founded.isNotEmpty) {
-      elements.add(Text("📜 Founded: ${houseUpdated.founded.toString()}"));
+      elements.add(
+        const Text(
+          "📜 Founded",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
+      elements.add(Text(houseUpdated.founded));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.diedOut.isNotEmpty) {
-      elements.add(Text("💀 Died out: ${houseUpdated.diedOut.toString()}"));
+      elements.add(
+        const Text(
+          "💀 Died out",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
+      elements.add(Text(houseUpdated.diedOut));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.titles.length > 1) {
-      elements.add(const Text("🎖️ Titles:"));
+      elements.add(
+        const Text(
+          "🎖️ Titles",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
       for (var title in houseUpdated.titles) {
         elements.add(Text(title));
       }
@@ -141,7 +188,12 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.seats.length > 1) {
-      elements.add(const Text("🏰 Seats:"));
+      elements.add(
+        const Text(
+          "🏰 Seats",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
       for (var seat in houseUpdated.seats) {
         elements.add(Text(seat));
       }
@@ -149,15 +201,25 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.ancestralWeapons.length > 1) {
-      elements.add(const Text("Ancestral Weapons:"));
+      elements.add(
+        const Text(
+          "🗡️ Ancestral Weapons",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
       for (var weapon in houseUpdated.ancestralWeapons) {
-        elements.add(Text("🗡️ ${weapon.toString()}"));
+        elements.add(Text(weapon));
       }
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.cadetBranches.isNotEmpty) {
-      elements.add(const Text("🏰 Cadet Branches:"));
+      elements.add(
+        const Text(
+          "🏰 Cadet Branches",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
       for (int i = 0; i < houseUpdated.cadetBranches.length; i++) {
         elements.add(
           FutureBuilder(
@@ -176,7 +238,12 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.swornMembers.isNotEmpty) {
-      elements.add(const Text("👱 Members:"));
+      elements.add(
+        const Text(
+          "👱 Members",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
       for (int i = 0; i < houseUpdated.swornMembers.length; i++) {
         elements.add(
           FutureBuilder(
