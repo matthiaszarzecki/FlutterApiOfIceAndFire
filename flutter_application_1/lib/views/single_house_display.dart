@@ -181,7 +181,7 @@ class SingleHouseDisplay extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       );
-      for (var title in houseUpdated.titles) {
+      for (String title in houseUpdated.titles) {
         elements.add(Text(title));
       }
       elements.add(_listSpacer());
@@ -194,7 +194,7 @@ class SingleHouseDisplay extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       );
-      for (var seat in houseUpdated.seats) {
+      for (String seat in houseUpdated.seats) {
         elements.add(Text(seat));
       }
       elements.add(_listSpacer());
@@ -207,7 +207,7 @@ class SingleHouseDisplay extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       );
-      for (var weapon in houseUpdated.ancestralWeapons) {
+      for (String weapon in houseUpdated.ancestralWeapons) {
         elements.add(Text(weapon));
       }
       elements.add(_listSpacer());

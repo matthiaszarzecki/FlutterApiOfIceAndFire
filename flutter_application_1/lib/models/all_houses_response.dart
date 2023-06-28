@@ -7,7 +7,7 @@ class AllHousesResponse {
 
   factory AllHousesResponse.fromJson(List<dynamic> json) {
     List<HouseBasic> houses = [];
-    for (var house in json) {
+    for (dynamic house in json) {
       houses.add(HouseBasic.fromJson(house));
     }
     return AllHousesResponse(houses: houses);
