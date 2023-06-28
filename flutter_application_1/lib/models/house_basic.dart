@@ -7,7 +7,6 @@ class HouseBasic {
   final String region;
   final String coatOfArms;
   final String words;
-  final String culture;
 
   final List<dynamic> titles;
   final List<dynamic> seats;
@@ -44,7 +43,6 @@ class HouseBasic {
     required this.ancestralWeapons,
     required this.cadetBranches,
     required this.swornMembers,
-    required this.culture,
   });
 
   factory HouseBasic.fromJson(Map<String, dynamic> json) {
@@ -52,7 +50,6 @@ class HouseBasic {
       url: json['url'],
       name: json['name'],
       region: json['region'],
-      culture: json['culture'],
       coatOfArms: json['coatOfArms'],
       words: json['words'],
       titles: json['titles'],
@@ -102,6 +99,5 @@ class HouseBasic {
     ],
     url: "https://www.anapioficeandfire.com/api/house/7",
     words: "No Foe May Pass",
-    culture: "Northmen",
   );
 }
