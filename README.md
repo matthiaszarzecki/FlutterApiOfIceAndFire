@@ -8,7 +8,7 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 :-------------------------:|:-------------------------:
 <img src="media/screenshot_01.png">|<img src="media/screenshot_02.png">|
 
-### Contains:
+### Contains
 - Native API Calls
 - Nested Calls
 - Pagination
@@ -22,7 +22,7 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Unit Tests
 - Error Handling
 
-### TODO:
+### TODO
 - Icons on Android
 - Improved Accessibility Features
 - Character View
@@ -31,7 +31,7 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Error handling for faulty json parsing
 - Error handling for faulty url
 
-### Nice to Have:
+### Nice to Have
 - Fastlane function to create screenshots for this readme
 - CodeCov integration in CICD
 - Monkey-Tests
@@ -46,5 +46,8 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 
 ### See Also
 - [SwiftUI Api of Ice and Fire](https://github.com/matthiaszarzecki/SwiftUIApiOfIceAndFire/)
+
+### Attribution
+- Dragon Icon created by Ramy Wafaa
 
 Created by Matthias Zarzecki, 2023-06
