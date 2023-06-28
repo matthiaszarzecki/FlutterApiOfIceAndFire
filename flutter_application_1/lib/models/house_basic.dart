@@ -8,8 +8,8 @@ class HouseBasic {
   final String coatOfArms;
   final String words;
 
-  final List<dynamic> titles;
-  final List<dynamic> seats;
+  final List<String> titles;
+  final List<String> seats;
 
   final String currentLord;
   final String heir;
@@ -18,9 +18,9 @@ class HouseBasic {
   final String founder;
   final String diedOut;
 
-  final List<dynamic> ancestralWeapons;
-  final List<dynamic> cadetBranches;
-  final List<dynamic> swornMembers;
+  final List<String> ancestralWeapons;
+  final List<String> cadetBranches;
+  final List<String> swornMembers;
 
   String initial() {
     return name.safeIndex(6);
@@ -52,17 +52,17 @@ class HouseBasic {
       region: json['region'],
       coatOfArms: json['coatOfArms'],
       words: json['words'],
-      titles: json['titles'],
-      seats: json['seats'],
+      titles: json['titles'].cast<String>(),
+      seats: json['seats'].cast<String>(),
       currentLord: json['currentLord'],
       heir: json['heir'],
       overlord: json['overlord'],
       founded: json['founded'],
       founder: json['founder'],
       diedOut: json['diedOut'],
-      ancestralWeapons: json['ancestralWeapons'],
-      cadetBranches: json['cadetBranches'],
-      swornMembers: json['swornMembers'],
+      ancestralWeapons: json['ancestralWeapons'].cast<String>(),
+      cadetBranches: json['cadetBranches'].cast<String>(),
+      swornMembers: json['swornMembers'].cast<String>(),
     );
   }
 
