@@ -20,14 +20,16 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Continuous Integration with BitRise
 - Icons on iOS
 - Unit Tests
+- Error Handling
 
 ### TODO:
 - Icons on Android
-- Unit-Tests
 - Improved Accessibility Features
-- Nicer Views
 - Character View
-- Timeouts
+- Linked nested house views
+- Timeouts during calls
+- Error handling for faulty json parsing
+- Error handling for faulty url
 
 ### Nice to Have:
 - Fastlane function to create screenshots for this readme
@@ -37,7 +39,12 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - UI-Tests
 - Dark Color Scheme & scheme switching
 - Automated tests for error-handling
-- Data Caching (Realm or CoreData)
+- Data Caching
 - Welcome Tab with House of the Day View
+- Info View
+- Major Houses View
+
+### See Also
+[SwiftUI Api of Ice and Fire](https://github.com/matthiaszarzecki/SwiftUIApiOfIceAndFire/)
 
 Created by Matthias Zarzecki, 2023-06
