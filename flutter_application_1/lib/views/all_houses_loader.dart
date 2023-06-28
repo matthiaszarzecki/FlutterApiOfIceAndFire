@@ -76,7 +76,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     return scrollController;
   }
 
-  EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 16.0);
+  final EdgeInsets _padding = const EdgeInsets.symmetric(horizontal: 16.0);
 
   @override
   Widget build(BuildContext context) {
@@ -98,16 +98,14 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
       case AllHousesLoaderState.resultsAndLoadingMore:
         return Center(
           child: Container(
-            padding: padding,
+            padding: _padding,
             child: ListView.builder(
               controller: _paginationController(),
               itemCount: allHouses.length + 1, // +1 for spinner
               itemBuilder: (BuildContext context, int index) {
-                if (index < allHouses.length) {
-                  return HouseCell(house: allHouses[index]);
-                } else {
-                  return const LoadingSpinner();
-                }
+                return index < allHouses.length
+                    ? HouseCell(house: allHouses[index])
+                    : const LoadingSpinner();
               },
             ),
           ),
@@ -115,7 +113,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
       case AllHousesLoaderState.resultsAndNotLoadingMore:
         return Center(
           child: Container(
-            padding: padding,
+            padding: _padding,
             child: ListView.builder(
               controller: _paginationController(),
               itemCount: allHouses.length,
@@ -128,7 +126,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
       case AllHousesLoaderState.error:
         return Center(
           child: Container(
-            padding: padding,
+            padding: _padding,
             child: Column(
               children: [
                 const Text("Oh no, something went wrong!"),
