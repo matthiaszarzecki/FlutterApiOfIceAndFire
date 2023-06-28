@@ -19,6 +19,7 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Small Screen Support
 - Continuous Integration with BitRise
 - Icons on iOS
+- Unit Tests
 
 ### TODO:
 - Icons on Android
@@ -27,7 +28,6 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Nicer Views
 - Character View
 - Timeouts
-- Unit-Tests
 
 ### Nice to Have:
 - Fastlane function to create screenshots for this readme
