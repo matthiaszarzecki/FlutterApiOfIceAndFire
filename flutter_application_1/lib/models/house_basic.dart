@@ -22,7 +22,7 @@ class HouseBasic {
   final List<dynamic> swornMembers;
 
   String initial() {
-    return name[6];
+    return name.safeIndex(6);
   }
 
   const HouseBasic({
@@ -102,4 +102,8 @@ class HouseBasic {
     words: "No Foe May Pass",
     culture: "Northmen",
   );
+}
+
+extension GetSafeCharacter on String {
+  String safeIndex(int index) => index < 0 || index >= length ? "" : this[index];
 }
