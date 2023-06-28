@@ -39,7 +39,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     Uri uri = Uri(
       scheme: 'https',
       host: 'anapioficeandfire.com',
-      path: 'api/houses',
+      pathSegments: ['api', 'houses'],
       queryParameters: {'page': '$currentPage', 'pageSize': '$pageSize'},
     );
     final response = await http.get(uri);
