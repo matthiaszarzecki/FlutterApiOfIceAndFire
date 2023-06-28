@@ -27,12 +27,24 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.coatOfArms.isNotEmpty) {
-      elements.add(Text("🛡️ ${houseUpdated.coatOfArms.toString()}"));
+      elements.add(
+        const Text(
+          "🛡️ Coat of Arms",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
+      elements.add(Text(houseUpdated.coatOfArms));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.words.isNotEmpty) {
-      elements.add(Text("🪶 ${houseUpdated.words.toString()}"));
+      elements.add(
+        const Text(
+          "🪶 Motto",
+          style: TextStyle(fontSize: 20),
+        ),
+      );
+      elements.add(Text(houseUpdated.words));
       elements.add(_listSpacer());
     }
 
@@ -42,7 +54,17 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Text("👑 Current Lord: ${character.name}");
+              List<Text> elements = [
+                const Text(
+                  "👑 Current Lord",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(character.name)
+              ];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: elements,
+              );
             }
             return const SizedBox(height: 0);
           },
