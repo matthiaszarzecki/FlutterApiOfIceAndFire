@@ -171,6 +171,9 @@ class SingleHouseDisplay extends StatelessWidget {
       }
     }
 
-    return ListView(children: elements);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ListView(children: elements),
+    );
   }
 }
