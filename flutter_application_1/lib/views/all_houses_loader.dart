@@ -36,8 +36,12 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    Uri uri = Uri.parse(
-        'https://anapioficeandfire.com/api/houses?page=$currentPage&pageSize=$pageSize');
+    Uri uri = Uri(
+      scheme: 'https',
+      host: 'anapioficeandfire.com',
+      path: 'api/houses',
+      queryParameters: {'page': '$currentPage', 'pageSize': '$pageSize'},
+    );
     final response = await http.get(uri);
 
     setState(
