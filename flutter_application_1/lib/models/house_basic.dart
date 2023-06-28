@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/extensions/string_extension.dart';
+
 // The house as it is returned from the API.
 class HouseBasic {
   final String url;
@@ -102,8 +104,4 @@ class HouseBasic {
     words: "No Foe May Pass",
     culture: "Northmen",
   );
-}
-
-extension GetSafeCharacter on String {
-  String safeIndex(int index) => index < 0 || index >= length ? "" : this[index];
 }
