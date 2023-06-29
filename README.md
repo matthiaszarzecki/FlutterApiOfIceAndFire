@@ -22,12 +22,12 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Unit Tests
 - Error Handling
 - iOS Icon, Display Name, Launch Image
+- Linked nested house views
 
 ### TODO
 - Icons on Android
 - Improved Accessibility Features
 - Character View
-- Linked nested house views
 - Timeouts during calls
 - Error handling for faulty json parsing
 - Error handling for faulty url
