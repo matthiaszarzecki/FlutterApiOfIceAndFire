@@ -23,6 +23,13 @@ class SingleHouseDisplay extends StatelessWidget {
     );
   }
 
+  Widget _singleHouseTextElement(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(text),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [];
@@ -34,29 +41,18 @@ class SingleHouseDisplay extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
       );
-
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.coatOfArms.isNotEmpty) {
       elements.add(_singleHouseHeader("🛡️ Coat of Arms"));
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(houseUpdated.coatOfArms),
-        ),
-      );
+      elements.add(_singleHouseTextElement(houseUpdated.coatOfArms));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.words.isNotEmpty) {
       elements.add(_singleHouseHeader("🪶 Motto"));
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(houseUpdated.words),
-        ),
-      );
+      elements.add(_singleHouseTextElement(houseUpdated.words));
       elements.add(_listSpacer());
     }
 
@@ -67,10 +63,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(character.name),
-              );
+              return _singleHouseTextElement(character.name);
             }
             return const SizedBox(height: 0);
           },
@@ -87,10 +80,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(character.name),
-              );
+              return _singleHouseTextElement(character.name);
             }
             return const SizedBox(height: 0);
           },
@@ -107,10 +97,7 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(character.name),
-              );
+              return _singleHouseTextElement(character.name);
             }
             return const SizedBox(height: 0);
           },
@@ -139,35 +126,20 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (houseUpdated.founded.isNotEmpty) {
       elements.add(_singleHouseHeader("📜 Founded"));
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(houseUpdated.founded),
-        ),
-      );
+      elements.add(_singleHouseTextElement(houseUpdated.founded));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.diedOut.isNotEmpty) {
       elements.add(_singleHouseHeader("💀 Died out"));
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(houseUpdated.diedOut),
-        ),
-      );
+      elements.add(_singleHouseTextElement(houseUpdated.diedOut));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.titles.isNotEmpty) {
       elements.add(_singleHouseHeader("🎖️ Titles"));
       for (String title in houseUpdated.titles) {
-        elements.add(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(title),
-          ),
-        );
+        elements.add(_singleHouseTextElement(title));
       }
       elements.add(_listSpacer());
     }
@@ -175,12 +147,7 @@ class SingleHouseDisplay extends StatelessWidget {
     if (houseUpdated.seats.isNotEmpty) {
       elements.add(_singleHouseHeader("🏰 Seats"));
       for (String seat in houseUpdated.seats) {
-        elements.add(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(seat),
-          ),
-        );
+        elements.add(_singleHouseTextElement(seat));
       }
       elements.add(_listSpacer());
     }
@@ -188,12 +155,7 @@ class SingleHouseDisplay extends StatelessWidget {
     if (houseUpdated.ancestralWeapons.length > 1) {
       elements.add(_singleHouseHeader("🗡️ Ancestral Weapons"));
       for (String weapon in houseUpdated.ancestralWeapons) {
-        elements.add(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(weapon),
-          ),
-        );
+        elements.add(_singleHouseTextElement(weapon));
       }
       elements.add(_listSpacer());
     }
@@ -225,10 +187,7 @@ class SingleHouseDisplay extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Character character = snapshot.data as Character;
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(character.name),
-                );
+                return _singleHouseTextElement(character.name);
               }
               return const SizedBox(height: 0);
             },
