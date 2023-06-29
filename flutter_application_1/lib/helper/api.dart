@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_application_1/helper/uri_handler.dart';
 import 'package:flutter_application_1/models/all_houses_response.dart';
+import 'package:flutter_application_1/models/character.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,6 +17,28 @@ class API {
         return newHouses;
       } 
       return null;
+    }
+    return null;
+  }
+
+  static Future<Character?> getCharacter(String characterURI) async {
+    Uri uri = Uri.parse(characterURI);
+    final response = await http.get(uri);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      Character character = Character.fromJson(jsonDecode(response.body));
+      return character;
+    } 
+    return null;
+  }
+
+  static Future<HouseBasic?> getSingleHouse(String houseURI) async {
+    Uri uri = Uri.parse(houseURI);
+    final response = await http.get(uri);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      HouseBasic houseBasic = HouseBasic.fromJson(jsonDecode(response.body));
+      return houseBasic;
     }
     return null;
   }
