@@ -10,14 +10,13 @@ class HouseCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = 40 + 10 * 2;
-
+    
     return Column(
       children: [
         const SizedBox(height: 6),
         Container(
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: Colors.red.shade400,
             borderRadius: BorderRadius.circular(12),
           ),
           child: SizedBox(
@@ -45,10 +44,17 @@ class HouseCell extends StatelessWidget {
                       const SizedBox(width: 10),
                       CircleAvatar(
                         radius: 12,
-                        child: Text(house.initial()),
+                        child: Text(
+                          house.initial(),
+                        ),
                       ),
                       const SizedBox(width: 10),
-                      Text(house.name),
+                      Text(
+                        house.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   )
                 ],
