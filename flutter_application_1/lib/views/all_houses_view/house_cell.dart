@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/models/house_basic.dart';
-import 'package:flutter_application_1/views/single_house_loader.dart';
+import 'package:flutter_application_1/views/single_house_view/single_house_loader.dart';
 import 'package:flutter/material.dart';
 
 class HouseCell extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter_application_1/helper/api.dart';
 import 'package:flutter_application_1/models/all_houses_response.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
-import 'package:flutter_application_1/views/house_cell.dart';
-import 'package:flutter_application_1/views/loading_spinner.dart';
+import 'package:flutter_application_1/views/all_houses_view/house_cell.dart';
+import 'package:flutter_application_1/views/modular_views/loading_spinner.dart';
 import 'package:flutter/material.dart';
 
 class AllHousesLoader extends StatefulWidget {

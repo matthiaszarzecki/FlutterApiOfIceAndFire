@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/views/all_houses_loader.dart';
+import 'package:flutter_application_1/views/all_houses_view/all_houses_loader.dart';
 import 'package:flutter/material.dart';
 
 class GOTApp extends StatelessWidget {
