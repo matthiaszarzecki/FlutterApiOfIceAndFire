@@ -37,6 +37,8 @@ class HouseCell extends StatelessWidget {
                     builder: (context) => Scaffold(
                       appBar: AppBar(
                         title: Text(house.name),
+                        backgroundColor: Colors.red.shade400,
+                        foregroundColor: Colors.white,
                       ),
                       body: SingleHouseLoader(houseBasic: house),
                     ),

@@ -35,6 +35,7 @@ class SingleHouseDisplay extends StatelessWidget {
     List<Widget> elements = [];
 
     if (houseUpdated.region.isNotEmpty) {
+      elements.add(_listSpacer());
       elements.add(
         Text(
           "of ${houseUpdated.region.toString()}",
@@ -187,7 +188,9 @@ class SingleHouseDisplay extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Character character = snapshot.data as Character;
-                return _singleHouseTextElement(character.name);
+                // Very rarely a character has an empty string for a name
+                String name = character.name != "" ? character.name : "Unknown";
+                return _singleHouseTextElement(name);
               }
               return const SizedBox(height: 0);
             },
