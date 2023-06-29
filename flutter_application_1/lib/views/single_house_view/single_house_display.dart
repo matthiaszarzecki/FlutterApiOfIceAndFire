@@ -13,20 +13,25 @@ class SingleHouseDisplay extends StatelessWidget {
     return const SizedBox(height: 10);
   }
 
+  Widget _singleHouseHeader(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 20),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
     if (houseUpdated.region.isNotEmpty) {
       elements.add(
-        Container(
-          // The HouseCell has shadow that overlaps an auto-constricting Listview,
-          // so we need to have padding for each element separately.
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            "of ${houseUpdated.region.toString()}",
-            textAlign: TextAlign.center,
-          ),
+        Text(
+          "of ${houseUpdated.region.toString()}",
+          textAlign: TextAlign.center,
         ),
       );
 
@@ -34,15 +39,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.coatOfArms.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🛡️ Coat of Arms",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🛡️ Coat of Arms"));
       elements.add(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,15 +50,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.words.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🪶 Motto",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🪶 Motto"));
       elements.add(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -72,27 +61,15 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.currentLord != null) {
+      elements.add(_singleHouseHeader("👑 Current Lord"));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              List<Widget> elements = [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: const Text(
-                    "👑 Current Lord",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(character.name),
-                )
-              ];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: elements,
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(character.name),
               );
             }
             return const SizedBox(height: 0);
@@ -104,27 +81,15 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.heir != null) {
+      elements.add(_singleHouseHeader("👱 Heir"));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              List<Widget> elements = [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: const Text(
-                    "👱 Heir",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(character.name),
-                )
-              ];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: elements,
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(character.name),
               );
             }
             return const SizedBox(height: 0);
@@ -136,27 +101,15 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.founder != null) {
+      elements.add(_singleHouseHeader("👱 Founder"));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Character character = snapshot.data as Character;
-              List<Widget> elements = [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: const Text(
-                    "👱 Founder",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(character.name),
-                )
-              ];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: elements,
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(character.name),
               );
             }
             return const SizedBox(height: 0);
@@ -168,15 +121,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.overlord != null) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🏰 Overlord",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🏰 Overlord"));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -193,15 +138,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.founded.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "📜 Founded",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("📜 Founded"));
       elements.add(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -212,15 +149,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.diedOut.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "💀 Died out",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("💀 Died out"));
       elements.add(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -231,15 +160,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.titles.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🎖️ Titles",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🎖️ Titles"));
       for (String title in houseUpdated.titles) {
         elements.add(
           Container(
@@ -252,15 +173,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.seats.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🏰 Seats",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🏰 Seats"));
       for (String seat in houseUpdated.seats) {
         elements.add(
           Container(
@@ -273,12 +186,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.ancestralWeapons.length > 1) {
-      elements.add(
-        const Text(
-          "🗡️ Ancestral Weapons",
-          style: TextStyle(fontSize: 20),
-        ),
-      );
+      elements.add(_singleHouseHeader("🗡️ Ancestral Weapons"));
       for (String weapon in houseUpdated.ancestralWeapons) {
         elements.add(
           Container(
@@ -291,15 +199,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.cadetBranches.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "🏰 Cadet Branches",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("🏰 Cadet Branches"));
       for (int i = 0; i < houseUpdated.cadetBranches.length; i++) {
         elements.add(
           FutureBuilder(
@@ -318,15 +218,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.swornMembers.isNotEmpty) {
-      elements.add(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
-            "👱 Members",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
+      elements.add(_singleHouseHeader("👱 Members"));
       for (int i = 0; i < houseUpdated.swornMembers.length; i++) {
         elements.add(
           FutureBuilder(
