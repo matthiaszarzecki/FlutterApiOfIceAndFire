@@ -21,6 +21,7 @@ A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [A
 - Icons on iOS
 - Unit Tests
 - Error Handling
+- iOS Icon, Display Name, Launch Image
 
 ### TODO
 - Icons on Android
