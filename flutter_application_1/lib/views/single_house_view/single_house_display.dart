@@ -34,6 +34,24 @@ class SingleHouseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
+    elements.add(
+      SizedBox(
+        height: 50,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Colors.red.shade400,
+                Colors.white,
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
     if (houseUpdated.region.isNotEmpty) {
       elements.add(_listSpacer());
       elements.add(
