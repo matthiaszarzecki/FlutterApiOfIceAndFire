@@ -44,11 +44,10 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
             for (HouseBasic house in newHouses) {
               allHouses.add(house);
             }
+            currentPage++;
           } else {
             state = AllHousesLoaderState.resultsAndNotLoadingMore;
           }
-
-          currentPage++;
         } else {
           state = AllHousesLoaderState.error;
         }
