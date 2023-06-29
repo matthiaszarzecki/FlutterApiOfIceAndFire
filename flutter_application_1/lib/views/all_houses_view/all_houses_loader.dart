@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter_application_1/helper/api.dart';
-import 'package:flutter_application_1/models/all_houses_response.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/views/all_houses_view/house_cell.dart';
 import 'package:flutter_application_1/views/modular_views/loading_spinner.dart';
@@ -36,14 +34,11 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    final dynamic response = await API.getHouses(currentPage);
+    final List<HouseBasic>? newHouses = await API.getHouses(currentPage);
 
     setState(
       () {
-        if (response.statusCode >= 200 && response.statusCode <= 299) {
-          List<HouseBasic> newHouses =
-              AllHousesResponse.fromJson(jsonDecode(response.body)).houses;
-
+        if (newHouses != null) {
           if (newHouses.isNotEmpty) {
             state = AllHousesLoaderState.resultsAndLoadingMore;
             for (HouseBasic house in newHouses) {
