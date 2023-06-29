@@ -57,34 +57,5 @@ class HouseCell extends StatelessWidget {
         ],
       ),
     );
-
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        textStyle: const TextStyle(fontSize: 14),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 12,
-            child: Text(house.initial()),
-          ),
-          const SizedBox(width: 10),
-          Text(house.name),
-        ],
-      ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Scaffold(
-              appBar: AppBar(
-                title: Text(house.name),
-              ),
-              body: SingleHouseLoader(houseBasic: house),
-            ),
-          ),
-        );
-      },
-    );
   }
 }
