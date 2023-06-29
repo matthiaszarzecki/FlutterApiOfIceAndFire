@@ -2,6 +2,7 @@ import 'package:flutter_application_1/models/character.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/models/house_updated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/views/house_cell.dart';
 
 class SingleHouseDisplay extends StatelessWidget {
   const SingleHouseDisplay({super.key, required this.houseUpdated});
@@ -132,12 +133,12 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               HouseBasic houseBasic = snapshot.data as HouseBasic;
-              List<Text> elements = [
+              List<Widget> elements = [
                 const Text(
                   "🏰 Overlord",
                   style: TextStyle(fontSize: 20),
                 ),
-                Text(houseBasic.name)
+                HouseCell(house: houseBasic),
               ];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +227,7 @@ class SingleHouseDisplay extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 HouseBasic houseBasic = snapshot.data as HouseBasic;
-                return Text(houseBasic.name);
+                return HouseCell(house: houseBasic);
               }
               return const SizedBox(height: 0);
             },
