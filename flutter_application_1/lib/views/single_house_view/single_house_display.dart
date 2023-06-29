@@ -169,24 +169,20 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (houseUpdated.overlord != null) {
       elements.add(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Text(
+            "🏰 Overlord",
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      );
+      elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               HouseBasic houseBasic = snapshot.data as HouseBasic;
-              List<Widget> elements = [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: const Text(
-                    "🏰 Overlord",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                HouseCell(house: houseBasic),
-              ];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: elements,
-              );
+              return HouseCell(house: houseBasic);
             }
             return const SizedBox(height: 0);
           },
