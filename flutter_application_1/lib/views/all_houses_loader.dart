@@ -74,8 +74,6 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     return scrollController;
   }
 
-  final EdgeInsets _padding = const EdgeInsets.symmetric(horizontal: 16.0);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,51 +93,42 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         );
       case AllHousesLoaderState.resultsAndLoadingMore:
         return Center(
-          child: Container(
-            padding: _padding,
-            child: ListView.builder(
-              controller: _paginationController(),
-              itemCount: allHouses.length + 1, // +1 for spinner
-              itemBuilder: (BuildContext context, int index) {
-                return index < allHouses.length
-                    ? HouseCell(house: allHouses[index])
-                    : const LoadingSpinner();
-              },
-            ),
+          child: ListView.builder(
+            controller: _paginationController(),
+            itemCount: allHouses.length + 1, // +1 for spinner
+            itemBuilder: (BuildContext context, int index) {
+              return index < allHouses.length
+                  ? HouseCell(house: allHouses[index])
+                  : const LoadingSpinner();
+            },
           ),
         );
       case AllHousesLoaderState.resultsAndNotLoadingMore:
         return Center(
-          child: Container(
-            padding: _padding,
-            child: ListView.builder(
-              controller: _paginationController(),
-              itemCount: allHouses.length,
-              itemBuilder: (BuildContext context, int index) {
-                return HouseCell(house: allHouses[index]);
-              },
-            ),
+          child: ListView.builder(
+            controller: _paginationController(),
+            itemCount: allHouses.length,
+            itemBuilder: (BuildContext context, int index) {
+              return HouseCell(house: allHouses[index]);
+            },
           ),
         );
       case AllHousesLoaderState.error:
         return Center(
-          child: Container(
-            padding: _padding,
-            child: Column(
-              children: [
-                const Text("Oh no, something went wrong!"),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 14),
-                  ),
-                  child: const Text("Retry!"),
-                  onPressed: () {
-                    state = AllHousesLoaderState.loadingInitial;
-                    _loadMoreHouses();
-                  },
+          child: Column(
+            children: [
+              const Text("Oh no, something went wrong!"),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 14),
                 ),
-              ],
-            ),
+                child: const Text("Retry!"),
+                onPressed: () {
+                  state = AllHousesLoaderState.loadingInitial;
+                  _loadMoreHouses();
+                },
+              ),
+            ],
           ),
         );
     }

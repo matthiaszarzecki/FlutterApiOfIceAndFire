@@ -10,7 +10,7 @@ class HouseCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    
+
     return Column(
       children: [
         const SizedBox(height: 6),
@@ -18,9 +18,16 @@ class HouseCell extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.red.shade400,
             borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.red.shade400.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 3,
+              ),
+            ],
           ),
           child: SizedBox(
-            width: width,
+            width: width - 16*2,
             height: 60,
             child: InkWell(
               onTap: () {
