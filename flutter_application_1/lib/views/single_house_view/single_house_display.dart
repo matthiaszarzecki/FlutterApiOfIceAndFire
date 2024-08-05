@@ -200,23 +200,45 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (houseUpdated.swornMembers.isNotEmpty) {
       elements.add(_singleHouseHeader("👱 Members"));
+      List<Widget> membersElements = [];
+
+      // Get Data for each character
       for (int i = 0; i < houseUpdated.swornMembers.length; i++) {
-        elements.add(
+        membersElements.add(
           FutureBuilder(
             builder: (context, snapshot) {
+              // Data exists, parse to Characters
               if (snapshot.hasData) {
                 Character character = snapshot.data as Character;
+
                 // Very rarely a character has an empty string for a name
-                String name = character.name != "" ? character.name : "Unknown";
-                return _singleHouseTextElement(name);
+                String characterName = character.name != "" ? character.name : "Unknown";
+
+                return _singleHouseTextElement(characterName);
               }
+
+              // No Data exists, return an empty view
               return const SizedBox(height: 0);
             },
             future: houseUpdated.swornMembers[i],
           ),
         );
       }
+      elements.addAll(membersElements);
     }
+
+    /*
+    static Future<Character?> getCharacter(String characterURI) async {
+    Uri uri = Uri.parse(characterURI);
+    final response = await http.get(uri);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      Character character = Character.fromJson(jsonDecode(response.body));
+      return character;
+    } 
+    return null;
+  }
+  */
 
     return ListView(children: elements);
   }
