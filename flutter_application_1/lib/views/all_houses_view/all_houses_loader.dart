@@ -72,7 +72,8 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.red.shade400,
+        foregroundColor: Colors.white,
         title: Text(widget.title),
       ),
       body: allHousesList(context),

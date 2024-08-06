@@ -1,9 +1,9 @@
 class Character {
   final String url;
   final String name;
-  final String? culture;
-  final String? born;
-  final String? died;
+  final String culture;
+  final String born;
+  final String died;
 
   const Character({
     required this.url,
@@ -24,17 +24,7 @@ class Character {
   }
 
   bool hasInformation() {
-    if (culture != null && culture != "") {
-      return true;
-    }
-    if (born != null && born != "") {
-      return true;
-    }
-    if (died != null && died != "") {
-      return true;
-    }
-
-    return false;
+    return culture != "" || born != "" || died != "";
   }
 
   /*bool hasInformation:  {
