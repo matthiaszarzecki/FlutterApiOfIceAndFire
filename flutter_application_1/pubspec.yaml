@@ -21,3 +21,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/dragon_icon_no_bg.png
+  fonts:
+  - family: Game of Thrones
+    fonts:
+      - asset: assets/Game of Thrones.ttf

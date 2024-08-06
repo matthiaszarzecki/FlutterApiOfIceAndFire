@@ -14,7 +14,7 @@ class LoadingSpinner extends StatelessWidget {
           SizedBox(
             width: _size,
             height: _size,
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.red),
           ),
           SizedBox(height: 46),
         ],
