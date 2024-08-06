@@ -7,6 +7,15 @@ class HouseCell extends StatelessWidget {
 
   final HouseBasic house;
 
+  bool _isGreatHouse() {
+    return [7, 17, 169, 195, 229, 285, 362, 378, 395, 398, 407]
+        .contains(house.id());
+  }
+
+  Color _colorMain() {
+    return _isGreatHouse() ? Colors.grey.shade800 : Colors.red.shade400;
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -16,18 +25,18 @@ class HouseCell extends StatelessWidget {
         const SizedBox(height: 6),
         Container(
           decoration: BoxDecoration(
-            color: Colors.red.shade400,
+            color: _colorMain(),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.red.shade400.withOpacity(0.5),
+                color: _colorMain().withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 3,
               ),
             ],
           ),
           child: SizedBox(
-            width: width - 16*2,
+            width: width - 16 * 2,
             height: 60,
             child: InkWell(
               onTap: () {

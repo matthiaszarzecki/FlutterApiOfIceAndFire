@@ -26,6 +26,11 @@ class HouseBasic {
     return name.safeIndex(6);
   }
 
+  int id() {
+    // ID is the last part of url: "https://www.anapioficeandfire.com/api/houses/285" -> 285
+    return int.parse(Uri.parse(url).pathSegments.last);
+  }
+
   const HouseBasic({
     required this.url,
     required this.name,
