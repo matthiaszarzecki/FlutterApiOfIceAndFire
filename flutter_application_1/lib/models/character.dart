@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/extensions/string_extension.dart';
+
 class Character {
   final String url;
   final String name;
@@ -25,6 +27,10 @@ class Character {
 
   bool hasInformation() {
     return culture != "" || born != "" || died != "";
+  }
+
+  String initial() {
+    return name.safeIndex(0);
   }
 
   /*bool hasInformation:  {

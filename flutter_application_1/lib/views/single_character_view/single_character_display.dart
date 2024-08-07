@@ -1,20 +1,16 @@
 import 'package:flutter_application_1/models/character.dart';
-import 'package:flutter_application_1/models/house_basic.dart';
-import 'package:flutter_application_1/models/house_updated.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/views/all_houses_view/house_cell.dart';
-import 'package:flutter_application_1/views/all_houses_view/character_cell.dart';
 
-class SingleHouseDisplay extends StatelessWidget {
-  const SingleHouseDisplay({super.key, required this.houseUpdated});
+class SingleCharacterDisplay extends StatelessWidget {
+  const SingleCharacterDisplay({super.key, required this.character});
 
-  final HouseUpdated houseUpdated;
+  final Character character;
 
   Widget _listSpacer() {
-    return const SizedBox(height: 24);
+    return const SizedBox(height: 10);
   }
 
-  Widget _singleHouseHeader(String text) {
+  Widget _singleCharacterHeader(String text) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Text(
@@ -24,12 +20,12 @@ class SingleHouseDisplay extends StatelessWidget {
     );
   }
 
-  Widget _singleHouseTextElement(String text) {
+  Widget _singleCharacterTextElement(String text) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }
@@ -38,6 +34,7 @@ class SingleHouseDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> elements = [];
 
+    // Gradient
     elements.add(
       SizedBox(
         height: 50,
@@ -56,14 +53,34 @@ class SingleHouseDisplay extends StatelessWidget {
       ),
     );
 
+    elements.add(_listSpacer());
+
+    if (character.born.isNotEmpty) {
+      elements.add(_singleCharacterHeader("📜 Born"));
+      elements.add(_singleCharacterTextElement(character.born));
+      elements.add(_listSpacer());
+    }
+
+    if (character.culture.isNotEmpty) {
+      elements.add(_singleCharacterHeader("🎭 Culture"));
+      elements.add(_singleCharacterTextElement(character.culture));
+      elements.add(_listSpacer());
+    }
+
+    if (character.died.isNotEmpty) {
+      elements.add(_singleCharacterHeader("☠️ Died"));
+      elements.add(_singleCharacterTextElement(character.died));
+      elements.add(_listSpacer());
+    }
+
+    /*
     if (houseUpdated.region.isNotEmpty) {
       elements.add(_listSpacer());
       elements.add(
         Text(
           "of ${houseUpdated.region.toString()}",
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16)
-        )
+        ),
       );
       elements.add(_listSpacer());
     }
@@ -253,10 +270,10 @@ class SingleHouseDisplay extends StatelessWidget {
                     : "Unknown";
 
                 if (character.hasInformation()) {
-                  return CharacterCell(character: character);
-                } else {
-                  return _singleHouseTextElement(characterName);
+                  characterName = '$characterName - has info';
                 }
+
+                return _singleHouseTextElement(characterName);
               }
 
               // No Data exists, return an empty view
@@ -268,7 +285,7 @@ class SingleHouseDisplay extends StatelessWidget {
       }
       elements.addAll(membersElements);
     }
-
+    */
     /*
     static Future<Character?> getCharacter(String characterURI) async {
       Uri uri = Uri.parse(characterURI);
@@ -280,7 +297,7 @@ class SingleHouseDisplay extends StatelessWidget {
       } 
       return null;
     }
-  */
+    */
 
     return ListView(children: elements);
   }
