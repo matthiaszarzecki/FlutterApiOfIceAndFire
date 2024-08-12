@@ -34,6 +34,17 @@ class SingleHouseDisplay extends StatelessWidget {
     );
   }
 
+  Widget _singleHouseCharacterNameElement(String text) {
+    return Container(
+      padding:
+          const EdgeInsets.only(left: 16.0, top: 6.0, right: 16, bottom: 6.0),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 16),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [];
@@ -58,13 +69,8 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (houseUpdated.region.isNotEmpty) {
       elements.add(_listSpacer());
-      elements.add(
-        Text(
-          "of ${houseUpdated.region.toString()}",
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16)
-        )
-      );
+      elements.add(Text("of ${houseUpdated.region.toString()}",
+          textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)));
       elements.add(_listSpacer());
     }
 
@@ -248,14 +254,13 @@ class SingleHouseDisplay extends StatelessWidget {
                 Character character = snapshot.data as Character;
 
                 // Very rarely a character has an empty string for a name
-                String characterName = character.name != ""
-                    ? character.name
-                    : "Unknown";
+                String characterName =
+                    character.name != "" ? character.name : "Unknown";
 
                 if (character.hasInformation()) {
                   return CharacterCell(character: character);
                 } else {
-                  return _singleHouseTextElement(characterName);
+                  return _singleHouseCharacterNameElement(characterName);
                 }
               }
 
