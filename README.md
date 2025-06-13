@@ -2,6 +2,8 @@
 
 [![Build Status](https://app.bitrise.io/app/7bbe88b4-4bff-485e-8a83-a98462102c3a/status.svg?token=78BHh1sbbIoVrVCapP2yqA&branch=main)](https://app.bitrise.io/app/7bbe88b4-4bff-485e-8a83-a98462102c3a) [![License: CC BY-SA 3.0](https://img.shields.io/badge/License-CC%20BY--SA%203.0-red.svg)](https://creativecommons.org/licenses/by-sa/3.0/) [![Twitter Follow](https://img.shields.io/twitter/follow/matthias_code?style=social)](https://twitter.com/matthias_code) [![Mastodon Follow](https://img.shields.io/mastodon/follow/112079288247188162?domain=https%3A%2F%2Fmastodon.social&style=social)](https://mastodon.social/@matthias_code) [![Youtube Subscribe](https://img.shields.io/youtube/channel/subscribers/UCvMdsKesM05bIG0eq7M5z1g?style=social)](https://www.youtube.com/channel/UCvMdsKesM05bIG0eq7M5z1g?sub_confirmation=1)
 
+[![Follow me on Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff&label=Follow%20me%20on&color=0285FF)](https://bsky.app/profile/matthiascode.bsky.social)
+
 A Flutter-App that lists the houses in A Song of Ice and Fire, taken from the [API of Ice And Fire](https://anapioficeandfire.com/). Also created separately [natively for iOS](https://github.com/matthiaszarzecki/SwiftUIApiOfIceAndFire/).
 
 | _ | _ |
