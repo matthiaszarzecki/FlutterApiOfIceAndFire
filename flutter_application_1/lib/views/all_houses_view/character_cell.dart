@@ -24,7 +24,7 @@ class CharacterCell extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: _colorMain().withOpacity(0.5),
+                color: _colorMain().withValues(alpha: 0.5),
                 spreadRadius: 3,
                 blurRadius: 3,
               ),
