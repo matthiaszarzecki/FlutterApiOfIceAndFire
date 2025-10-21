@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_application_1/models/character.dart';
 import 'package:flutter_application_1/views/single_character_view/single_character_display.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +9,32 @@ class CharacterCell extends StatelessWidget {
 
   final Character character;
 
+  // TODO: Extract this, simplify
   Color _colorMain() {
-    return Colors.red.shade400;
+    Color baseColor = Colors.red.shade400;
+    final int randomRange = 60;
+    final int halfRandomRange = (randomRange / 2).round();
+
+    final newR = ((baseColor.r * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newG = ((baseColor.g * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newB = ((baseColor.b * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+
+    Color newColor = Color.fromARGB(
+      255,
+      newR,
+      newG,
+      newB,
+    );
+    return newColor;
   }
 
   @override

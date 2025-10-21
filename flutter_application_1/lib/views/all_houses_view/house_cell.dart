@@ -31,6 +31,7 @@ class HouseCell extends StatelessWidget {
     return _isGreatHouse() ? Colors.grey.shade800 : _randomRedColor();
   }
 
+  // TODO: Extract this, simplify
   Color _randomRedColor() {
     Color baseColor = Colors.red.shade400;
     final int randomRange = 60;
