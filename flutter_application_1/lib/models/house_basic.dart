@@ -27,7 +27,8 @@ class HouseBasic {
   }
 
   int id() {
-    // ID is the last part of url: "https://www.anapioficeandfire.com/api/houses/285" -> 285
+    // ID is the last part of URL:
+    // 'https://www.anapioficeandfire.com/api/houses/285' -> 285
     return int.parse(Uri.parse(url).pathSegments.last);
   }
 

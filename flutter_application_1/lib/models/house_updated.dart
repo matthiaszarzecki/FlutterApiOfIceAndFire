@@ -3,12 +3,12 @@ import 'package:flutter_application_1/models/house_basic.dart';
 
 /// The house with its nested Character and House data loaded.
 class HouseUpdated {
-  String name = "";
-  String region = "";
-  String coatOfArms = "";
-  String words = "";
-  String founded = "";
-  String diedOut = "";
+  String name = '';
+  String region = '';
+  String coatOfArms = '';
+  String words = '';
+  String founded = '';
+  String diedOut = '';
 
   List<dynamic> titles = [];
   List<dynamic> seats = [];
