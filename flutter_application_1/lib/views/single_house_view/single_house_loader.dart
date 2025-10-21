@@ -15,7 +15,8 @@ class SingleHouseLoader extends StatefulWidget {
 }
 
 class _SingleHouseLoaderState extends State<SingleHouseLoader> {
-  late HouseUpdated houseUpdated;
+  late final HouseUpdated houseUpdated;
+  late final API _api = API.instance;
 
   @override
   void initState() {
@@ -30,7 +31,7 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     if (widget.houseBasic.currentLord.isNotEmpty) {
       setState(() {
-        houseUpdated.currentLord = API.getCharacter(
+        houseUpdated.currentLord = _api.getCharacter(
           widget.houseBasic.currentLord,
         );
       });
@@ -38,20 +39,20 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     if (widget.houseBasic.heir.isNotEmpty) {
       setState(() {
-        houseUpdated.heir = API.getCharacter(widget.houseBasic.heir);
+        houseUpdated.heir = API.instance.getCharacter(widget.houseBasic.heir);
       });
     }
 
     if (widget.houseBasic.founder.isNotEmpty) {
       setState(() {
-        houseUpdated.founder = API.getCharacter(widget.houseBasic.founder);
+        houseUpdated.founder = API.instance.getCharacter(widget.houseBasic.founder);
       });
     }
 
     if (widget.houseBasic.swornMembers.isNotEmpty) {
       for (String characterURL in widget.houseBasic.swornMembers) {
         setState(() {
-          Future<Character?> newCharacter = API.getCharacter(characterURL);
+          Future<Character?> newCharacter = API.instance.getCharacter(characterURL);
           houseUpdated.swornMembers.add(newCharacter);
         });
       }
@@ -61,14 +62,14 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     if (widget.houseBasic.overlord.isNotEmpty) {
       setState(() {
-        houseUpdated.overlord = API.getSingleHouse(widget.houseBasic.overlord);
+        houseUpdated.overlord = API.instance.getSingleHouse(widget.houseBasic.overlord);
       });
     }
 
     if (widget.houseBasic.cadetBranches.isNotEmpty) {
       for (String houseURL in widget.houseBasic.cadetBranches) {
         setState(() {
-          Future<HouseBasic?> newHouse = API.getSingleHouse(houseURL);
+          Future<HouseBasic?> newHouse = API.instance.getSingleHouse(houseURL);
           houseUpdated.cadetBranches.add(newHouse);
         });
       }

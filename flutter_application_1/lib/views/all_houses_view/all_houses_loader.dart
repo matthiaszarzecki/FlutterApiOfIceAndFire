@@ -34,7 +34,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    final List<HouseBasic>? newHouses = await API.getHouses(currentPage);
+    final List<HouseBasic>? newHouses = await API.instance.getHouses(currentPage);
 
     setState(
       () {

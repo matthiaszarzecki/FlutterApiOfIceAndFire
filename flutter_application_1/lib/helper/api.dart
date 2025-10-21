@@ -6,7 +6,9 @@ import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:http/http.dart' as http;
 
 class API {
-  static Future<List<HouseBasic>?> getHouses(int page) async {
+  static final instance = API();
+
+  Future<List<HouseBasic>?> getHouses(int page) async {
     final dynamic response = await http.get(URIHandler.getHousesUri(page));
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
@@ -21,7 +23,7 @@ class API {
     return null;
   }
 
-  static Future<Character?> getCharacter(String characterURI) async {
+  Future<Character?> getCharacter(String characterURI) async {
     Uri uri = Uri.parse(characterURI);
     final response = await http.get(uri);
 
@@ -32,7 +34,7 @@ class API {
     return null;
   }
 
-  static Future<HouseBasic?> getSingleHouse(String houseURI) async {
+  Future<HouseBasic?> getSingleHouse(String houseURI) async {
     Uri uri = Uri.parse(houseURI);
     final response = await http.get(uri);
 
