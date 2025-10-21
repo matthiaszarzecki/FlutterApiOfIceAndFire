@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_application_1/models/character.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/models/house_updated.dart';
@@ -180,7 +182,8 @@ class SingleHouseDisplay extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               HouseBasic houseBasic = snapshot.data as HouseBasic;
-              return HouseCell(house: houseBasic);
+              // TODO: Pass actual color here
+              return HouseCell(house: houseBasic, color: _randomRedColor());
             }
             return const SizedBox(height: 0);
           },
@@ -234,7 +237,8 @@ class SingleHouseDisplay extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 HouseBasic houseBasic = snapshot.data as HouseBasic;
-                return HouseCell(house: houseBasic);
+                // TODO: Pass actual color here
+                return HouseCell(house: houseBasic, color: _randomRedColor());
               }
               return const SizedBox(height: 0);
             },
@@ -285,5 +289,33 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     return ListView(children: elements);
+  }
+
+  // TODO: Extract this, simplify
+  Color _randomRedColor() {
+    Color baseColor = Colors.red.shade400;
+    final int randomRange = 60;
+    final int halfRandomRange = (randomRange / 2).round();
+
+    final newR = ((baseColor.r * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newG = ((baseColor.g * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newB = ((baseColor.b * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+
+    Color newColor = Color.fromARGB(
+      255,
+      newR,
+      newG,
+      newB,
+    );
+    return newColor;
   }
 }

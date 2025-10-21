@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_application_1/helper/api.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/views/all_houses_view/house_cell.dart';
@@ -65,6 +67,34 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
     return scrollController;
   }
 
+  // TODO: Extract this, simplify
+  Color _randomRedColor() {
+    Color baseColor = Colors.red.shade400;
+    final int randomRange = 60;
+    final int halfRandomRange = (randomRange / 2).round();
+
+    final newR = ((baseColor.r * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newG = ((baseColor.g * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newB = ((baseColor.b * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+
+    Color newColor = Color.fromARGB(
+      255,
+      newR,
+      newG,
+      newB,
+    );
+    return newColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +120,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
             itemCount: _allHouses.length + 1, // +1 for spinner
             itemBuilder: (BuildContext context, int index) {
               return index < _allHouses.length
-                  ? HouseCell(house: _allHouses[index])
+                  ? HouseCell(house: _allHouses[index], color: _randomRedColor())
                   : const LoadingSpinner();
             },
           ),
@@ -101,7 +131,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
             controller: _paginationController(),
             itemCount: _allHouses.length,
             itemBuilder: (BuildContext context, int index) {
-              return HouseCell(house: _allHouses[index]);
+              return HouseCell(house: _allHouses[index], color: _randomRedColor());
             },
           ),
         );
