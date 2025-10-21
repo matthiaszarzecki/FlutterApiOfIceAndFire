@@ -2,8 +2,8 @@ import 'package:flutter_application_1/helper/api.dart';
 import 'package:flutter_application_1/models/character.dart';
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/models/house_updated.dart';
+import 'package:flutter_application_1/views/single_house_view/single_house_display.dart';
 import 'package:flutter/material.dart';
-import 'single_house_display.dart';
 
 class SingleHouseLoader extends StatefulWidget {
   const SingleHouseLoader({super.key, required this.houseBasic});
@@ -26,6 +26,7 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
     _loadNestedData();
   }
 
+  // TODO: To ViewModel?
   void _loadNestedData() {
     // Nested Characters
 
@@ -38,21 +39,27 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
     }
 
     if (widget.houseBasic.heir.isNotEmpty) {
+      Future<Character?> newCharacter = _api.getCharacter(
+        widget.houseBasic.heir,
+      );
       setState(() {
-        houseUpdated.heir = API.instance.getCharacter(widget.houseBasic.heir);
+        houseUpdated.heir = newCharacter;
       });
     }
 
     if (widget.houseBasic.founder.isNotEmpty) {
+      Future<Character?> newCharacter = _api.getCharacter(
+        widget.houseBasic.founder,
+      );
       setState(() {
-        houseUpdated.founder = API.instance.getCharacter(widget.houseBasic.founder);
+        houseUpdated.founder = newCharacter;
       });
     }
 
     if (widget.houseBasic.swornMembers.isNotEmpty) {
       for (String characterURL in widget.houseBasic.swornMembers) {
+        Future<Character?> newCharacter = _api.getCharacter(characterURL);
         setState(() {
-          Future<Character?> newCharacter = API.instance.getCharacter(characterURL);
           houseUpdated.swornMembers.add(newCharacter);
         });
       }
@@ -61,16 +68,21 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
     // Nested Houses
 
     if (widget.houseBasic.overlord.isNotEmpty) {
+      Future<HouseBasic?> newHouseBasic = _api.getSingleHouse(
+        widget.houseBasic.overlord,
+      );
       setState(() {
-        houseUpdated.overlord = API.instance.getSingleHouse(widget.houseBasic.overlord);
+        houseUpdated.overlord = newHouseBasic;
       });
     }
 
     if (widget.houseBasic.cadetBranches.isNotEmpty) {
       for (String houseURL in widget.houseBasic.cadetBranches) {
+        Future<HouseBasic?> newHouseBasic = _api.getSingleHouse(
+          houseURL,
+        );
         setState(() {
-          Future<HouseBasic?> newHouse = API.instance.getSingleHouse(houseURL);
-          houseUpdated.cadetBranches.add(newHouse);
+          houseUpdated.cadetBranches.add(newHouseBasic);
         });
       }
     }
