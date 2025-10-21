@@ -22,7 +22,7 @@ enum AllHousesLoaderState {
 
 class _AllHousesLoaderState extends State<AllHousesLoader> {
   int _currentPage = 1;
-  List<HouseBasic> _allHouses = [];
+  final List<HouseBasic> _allHouses = [];
   AllHousesLoaderState _state = AllHousesLoaderState.loadingInitial;
   final API _api = API.instance;
 
