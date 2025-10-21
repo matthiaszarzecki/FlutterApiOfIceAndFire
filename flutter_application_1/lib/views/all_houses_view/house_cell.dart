@@ -31,6 +31,7 @@ class HouseCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    int padding = 16;
 
     return Column(
       children: [
@@ -48,7 +49,7 @@ class HouseCell extends StatelessWidget {
             ],
           ),
           child: SizedBox(
-            width: width - 16 * 2,
+            width: width - padding * 2,
             height: 60,
             child: InkWell(
               onTap: () {
