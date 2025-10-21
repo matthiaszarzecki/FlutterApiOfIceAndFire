@@ -34,7 +34,34 @@ class SingleHouseDisplay extends StatelessWidget {
     );
   }
 
-  Widget _singleHouseCharacterNameElement(String text) {
+  Widget _singleHouseCharacterNameElement(String text, double width) {
+    return Column(
+      children: [
+        const SizedBox(height: 6),
+        Container(
+          decoration: BoxDecoration(
+            //color: Colors.red.shade400,
+            borderRadius: BorderRadius.circular(12),
+            border: BoxBorder.all(),
+          ),
+          child: SizedBox(
+            width: width - 16 * 2,
+            height: 36,
+            child: InkWell(
+                child: Row(
+              children: [
+                const SizedBox(width: 6),
+                Text(
+                  text,
+                ),
+              ],
+            )),
+          ),
+        ),
+        const SizedBox(height: 6),
+      ],
+    );
+
     return Container(
       padding: const EdgeInsets.only(
         left: 16.0,
@@ -240,7 +267,10 @@ class SingleHouseDisplay extends StatelessWidget {
                 if (character.hasInformation()) {
                   return CharacterCell(character: character);
                 } else {
-                  return _singleHouseCharacterNameElement(characterName);
+                  return _singleHouseCharacterNameElement(
+                    characterName,
+                    MediaQuery.of(context).size.width,
+                  );
                 }
               }
 
