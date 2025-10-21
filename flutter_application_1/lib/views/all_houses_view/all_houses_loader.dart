@@ -21,11 +21,10 @@ enum AllHousesLoaderState {
 }
 
 class _AllHousesLoaderState extends State<AllHousesLoader> {
-  int currentPage = 1;
-  List<HouseBasic> allHouses = [];
-  AllHousesLoaderState state = AllHousesLoaderState.loadingInitial;
-
-  final int pageSize = 50;
+  int _currentPage = 1;
+  List<HouseBasic> _allHouses = [];
+  AllHousesLoaderState _state = AllHousesLoaderState.loadingInitial;
+  final API _api = API.instance;
 
   @override
   void initState() {
@@ -34,37 +33,35 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   void _loadMoreHouses() async {
-    final List<HouseBasic>? newHouses = await API.instance.getHouses(currentPage);
-
-    setState(
-      () {
-        if (newHouses != null) {
-          if (newHouses.isNotEmpty) {
-            state = AllHousesLoaderState.resultsAndLoadingMore;
-            for (HouseBasic house in newHouses) {
-              allHouses.add(house);
-            }
-            currentPage++;
-          } else {
-            state = AllHousesLoaderState.resultsAndNotLoadingMore;
-          }
-        } else {
-          state = AllHousesLoaderState.error;
-        }
-      },
+    final List<HouseBasic>? newHouses = await _api.getHouses(
+      _currentPage,
     );
+
+    setState(() {
+      if (newHouses != null) {
+        if (newHouses.isNotEmpty) {
+          _state = AllHousesLoaderState.resultsAndLoadingMore;
+          for (HouseBasic house in newHouses) {
+            _allHouses.add(house);
+          }
+          _currentPage++;
+        } else {
+          _state = AllHousesLoaderState.resultsAndNotLoadingMore;
+        }
+      } else {
+        _state = AllHousesLoaderState.error;
+      }
+    });
   }
 
   ScrollController _paginationController() {
     ScrollController scrollController = ScrollController();
-    scrollController.addListener(
-      () {
-        if (scrollController.position.maxScrollExtent ==
-            scrollController.position.pixels) {
-          _loadMoreHouses();
-        }
-      },
-    );
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        _loadMoreHouses();
+      }
+    });
     return scrollController;
   }
 
@@ -81,7 +78,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
   }
 
   Widget allHousesList(BuildContext context) {
-    switch (state) {
+    switch (_state) {
       case AllHousesLoaderState.loadingInitial:
         return const Center(
           child: LoadingSpinner(),
@@ -90,10 +87,10 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         return Center(
           child: ListView.builder(
             controller: _paginationController(),
-            itemCount: allHouses.length + 1, // +1 for spinner
+            itemCount: _allHouses.length + 1, // +1 for spinner
             itemBuilder: (BuildContext context, int index) {
-              return index < allHouses.length
-                  ? HouseCell(house: allHouses[index])
+              return index < _allHouses.length
+                  ? HouseCell(house: _allHouses[index])
                   : const LoadingSpinner();
             },
           ),
@@ -102,9 +99,9 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         return Center(
           child: ListView.builder(
             controller: _paginationController(),
-            itemCount: allHouses.length,
+            itemCount: _allHouses.length,
             itemBuilder: (BuildContext context, int index) {
-              return HouseCell(house: allHouses[index]);
+              return HouseCell(house: _allHouses[index]);
             },
           ),
         );
@@ -119,7 +116,7 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
                 ),
                 child: const Text('Retry!'),
                 onPressed: () {
-                  state = AllHousesLoaderState.loadingInitial;
+                  _state = AllHousesLoaderState.loadingInitial;
                   _loadMoreHouses();
                 },
               ),
