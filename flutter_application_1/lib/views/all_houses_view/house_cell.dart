@@ -8,8 +8,20 @@ class HouseCell extends StatelessWidget {
   final HouseBasic house;
 
   bool _isGreatHouse() {
-    return [7, 17, 169, 195, 229, 285, 362, 378, 395, 398, 407]
-        .contains(house.id());
+    const List<int> listOfGreatHouses = [
+      7,
+      17,
+      169,
+      195,
+      229,
+      285,
+      362,
+      378,
+      395,
+      398,
+      407,
+    ];
+    return listOfGreatHouses.contains(house.id());
   }
 
   Color _colorMain() {

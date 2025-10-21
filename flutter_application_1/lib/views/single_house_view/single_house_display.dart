@@ -36,8 +36,12 @@ class SingleHouseDisplay extends StatelessWidget {
 
   Widget _singleHouseCharacterNameElement(String text) {
     return Container(
-      padding:
-          const EdgeInsets.only(left: 16.0, top: 6.0, right: 16, bottom: 6.0),
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        top: 6.0,
+        right: 16,
+        bottom: 6.0,
+      ),
       child: Text(
         text,
         style: const TextStyle(fontSize: 16),
@@ -69,25 +73,30 @@ class SingleHouseDisplay extends StatelessWidget {
 
     if (houseUpdated.region.isNotEmpty) {
       elements.add(_listSpacer());
-      elements.add(Text("of ${houseUpdated.region.toString()}",
-          textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)));
+      elements.add(
+        Text(
+          'of ${houseUpdated.region.toString()}',
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 16),
+        ),
+      );
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.coatOfArms.isNotEmpty) {
-      elements.add(_singleHouseHeader("🛡️ Coat of Arms"));
+      elements.add(_singleHouseHeader('🛡️ Coat of Arms'));
       elements.add(_singleHouseTextElement(houseUpdated.coatOfArms));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.words.isNotEmpty) {
-      elements.add(_singleHouseHeader("🪶 Motto"));
+      elements.add(_singleHouseHeader('🪶 Motto'));
       elements.add(_singleHouseTextElement(houseUpdated.words));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.currentLord != null) {
-      elements.add(_singleHouseHeader("👑 Current Lord"));
+      elements.add(_singleHouseHeader('👑 Current Lord'));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -104,7 +113,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.heir != null) {
-      elements.add(_singleHouseHeader("👱 Heir"));
+      elements.add(_singleHouseHeader('👱 Heir'));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -121,7 +130,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.founder != null) {
-      elements.add(_singleHouseHeader("👱 Founder"));
+      elements.add(_singleHouseHeader('👱 Founder'));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -138,7 +147,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.overlord != null) {
-      elements.add(_singleHouseHeader("🏰 Overlord"));
+      elements.add(_singleHouseHeader('🏰 Overlord'));
       elements.add(
         FutureBuilder(
           builder: (context, snapshot) {
@@ -155,19 +164,19 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.founded.isNotEmpty) {
-      elements.add(_singleHouseHeader("📜 Founded"));
+      elements.add(_singleHouseHeader('📜 Founded'));
       elements.add(_singleHouseTextElement(houseUpdated.founded));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.diedOut.isNotEmpty) {
-      elements.add(_singleHouseHeader("💀 Died out"));
+      elements.add(_singleHouseHeader('💀 Died out'));
       elements.add(_singleHouseTextElement(houseUpdated.diedOut));
       elements.add(_listSpacer());
     }
 
     if (houseUpdated.titles.isNotEmpty) {
-      elements.add(_singleHouseHeader("🎖️ Titles"));
+      elements.add(_singleHouseHeader('🎖️ Titles'));
       for (String title in houseUpdated.titles) {
         elements.add(_singleHouseTextElement(title));
       }
@@ -175,7 +184,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.seats.isNotEmpty) {
-      elements.add(_singleHouseHeader("🏰 Seats"));
+      elements.add(_singleHouseHeader('🏰 Seats'));
       for (String seat in houseUpdated.seats) {
         elements.add(_singleHouseTextElement(seat));
       }
@@ -183,7 +192,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.ancestralWeapons.length > 1) {
-      elements.add(_singleHouseHeader("🗡️ Ancestral Weapons"));
+      elements.add(_singleHouseHeader('🗡️ Ancestral Weapons'));
       for (String weapon in houseUpdated.ancestralWeapons) {
         elements.add(_singleHouseTextElement(weapon));
       }
@@ -191,7 +200,7 @@ class SingleHouseDisplay extends StatelessWidget {
     }
 
     if (houseUpdated.cadetBranches.isNotEmpty) {
-      elements.add(_singleHouseHeader("🏰 Cadet Branches"));
+      elements.add(_singleHouseHeader('🏰 Cadet Branches'));
       for (int i = 0; i < houseUpdated.cadetBranches.length; i++) {
         elements.add(
           FutureBuilder(
@@ -209,37 +218,8 @@ class SingleHouseDisplay extends StatelessWidget {
       elements.add(_listSpacer());
     }
 
-    /*if (houseUpdated.swornMembers.isNotEmpty) {
-      elements.add(_singleHouseHeader("👱 Members"));
-      List<Widget> membersElements = [];
-
-      // Get Data for each character
-      for (int i = 0; i < houseUpdated.swornMembers.length; i++) {
-        membersElements.add(
-          FutureBuilder(
-            builder: (context, snapshot) {
-              // Data exists, parse to Characters
-              if (snapshot.hasData) {
-                Character character = snapshot.data as Character;
-
-                // Very rarely a character has an empty string for a name
-                String characterName = character.name != "" ? character.name : "Unknown";
-
-                return _singleHouseTextElement(characterName);
-              }
-
-              // No Data exists, return an empty view
-              return const SizedBox(height: 0);
-            },
-            future: houseUpdated.swornMembers[i],
-          ),
-        );
-      }
-      elements.addAll(membersElements);
-    }*/
-
     if (houseUpdated.swornMembers.isNotEmpty) {
-      elements.add(_singleHouseHeader("👱 Members"));
+      elements.add(_singleHouseHeader('👱 Members'));
       List<Widget> membersElements = [];
 
       // Get Data for each character
@@ -255,7 +235,7 @@ class SingleHouseDisplay extends StatelessWidget {
 
                 // Very rarely a character has an empty string for a name
                 String characterName =
-                    character.name != "" ? character.name : "Unknown";
+                    character.name != '' ? character.name : 'Unknown';
 
                 if (character.hasInformation()) {
                   return CharacterCell(character: character);
@@ -273,19 +253,6 @@ class SingleHouseDisplay extends StatelessWidget {
       }
       elements.addAll(membersElements);
     }
-
-    /*
-    static Future<Character?> getCharacter(String characterURI) async {
-      Uri uri = Uri.parse(characterURI);
-      final response = await http.get(uri);
-
-      if (response.statusCode >= 200 && response.statusCode <= 299) {
-        Character character = Character.fromJson(jsonDecode(response.body));
-        return character;
-      } 
-      return null;
-    }
-  */
 
     return ListView(children: elements);
   }

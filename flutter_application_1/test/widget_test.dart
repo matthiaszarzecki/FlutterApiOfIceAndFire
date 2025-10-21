@@ -43,7 +43,7 @@ void main() {
 
   test('String safe index function should return empty character on negative string', () {
     // GIVEN a simple string
-    const mockString = "hello";
+    const mockString = 'hello';
 
     // WHEN we access a character using safeIndex with an invalid index
     String result = mockString.safeIndex(-1);

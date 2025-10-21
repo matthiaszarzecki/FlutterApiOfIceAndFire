@@ -30,8 +30,9 @@ class _SingleHouseLoaderState extends State<SingleHouseLoader> {
 
     if (widget.houseBasic.currentLord.isNotEmpty) {
       setState(() {
-        houseUpdated.currentLord =
-            API.getCharacter(widget.houseBasic.currentLord);
+        houseUpdated.currentLord = API.getCharacter(
+          widget.houseBasic.currentLord,
+        );
       });
     }
 

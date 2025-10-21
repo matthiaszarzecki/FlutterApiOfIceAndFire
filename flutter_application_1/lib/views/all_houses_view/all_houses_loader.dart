@@ -112,12 +112,12 @@ class _AllHousesLoaderState extends State<AllHousesLoader> {
         return Center(
           child: Column(
             children: [
-              const Text("Oh no, something went wrong!"),
+              const Text('Oh no, something went wrong!'),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 14),
                 ),
-                child: const Text("Retry!"),
+                child: const Text('Retry!'),
                 onPressed: () {
                   state = AllHousesLoaderState.loadingInitial;
                   _loadMoreHouses();
