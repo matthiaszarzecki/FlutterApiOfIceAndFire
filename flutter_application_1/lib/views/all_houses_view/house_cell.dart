@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_application_1/models/house_basic.dart';
 import 'package:flutter_application_1/views/single_house_view/single_house_loader.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ class HouseCell extends StatelessWidget {
   final HouseBasic house;
 
   bool _isGreatHouse() {
+    // TODO: Move to constants file
     const List<int> listOfGreatHouses = [
       7,
       17,
@@ -25,7 +28,34 @@ class HouseCell extends StatelessWidget {
   }
 
   Color _colorMain() {
-    return _isGreatHouse() ? Colors.grey.shade800 : Colors.red.shade400;
+    return _isGreatHouse() ? Colors.grey.shade800 : _randomRedColor();
+  }
+
+  Color _randomRedColor() {
+    Color baseColor = Colors.red.shade400;
+    final int randomRange = 60;
+    final int halfRandomRange = (randomRange / 2).round();
+
+    final newR = ((baseColor.r * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newG = ((baseColor.g * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+    final newB = ((baseColor.b * 255).round() +
+            Random().nextInt(randomRange) -
+            halfRandomRange)
+        .clamp(0, 255);
+
+    Color newColor = Color.fromARGB(
+      255,
+      newR,
+      newG,
+      newB,
+    );
+    return newColor;
   }
 
   @override
